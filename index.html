@@ -1,357 +1,588 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Azasure – AI Powered Finance</title>
-  <style>
-    /* GLOBAL STYLES */
-    :root {
-      --bg-light: #f8f9fa;
-      --bg-dark: #0a0a0a;
-      --text-light: #0a0a0a;
-      --text-dark: #f8f9fa;
-      --primary: #6a5acd;
-      --secondary: #00f7ff;
-      --accent: #ff0077;
-      --transition: 0.3s ease;
-    }
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: var(--bg-dark);
-      color: var(--text-dark);
-      transition: background var(--transition), color var(--transition);
-    }
-    body.light {
-      background: var(--bg-light);
-      color: var(--text-light);
-    }
-    h1,h2,h3,h4 {
-      margin: 0;
-    }
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-    section {
-      padding: 80px 20px;
-      text-align: center;
-    }
-    .btn {
-      background: var(--primary);
-      color: #fff;
-      padding: 12px 28px;
-      border-radius: 30px;
-      font-weight: bold;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .btn:hover {
-      transform: scale(1.05);
-      background: var(--accent);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AzaSure - Smart Money, Instant Results</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #001f1f; /* Dark teal background */
+            color: #f0f0f0; /* Light text */
+            line-height: 1.6;
+        }
 
-    /* HEADER */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      background: rgba(10,10,10,0.85);
-      backdrop-filter: blur(12px);
-      transition: var(--transition);
-    }
-    body.light header {
-      background: rgba(248,249,250,0.85);
-    }
-    header .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: var(--secondary);
-    }
-    nav a {
-      margin-left: 20px;
-      font-weight: 500;
-    }
-    .toggle-mode {
-      margin-left: 20px;
-      cursor: pointer;
-      font-size: 1.2em;
-    }
+        a {
+            text-decoration: none;
+            color: #ffd700; /* Gold */
+        }
 
-    /* HERO */
-    .hero {
-      height: 90vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #0a0a0a, #1a0033);
-      color: #fff;
-      text-align: center;
-    }
-    body.light .hero {
-      background: linear-gradient(135deg, #f8f9fa, #dcdcdc);
-      color: #000;
-    }
-    .hero h1 {
-      font-size: 3em;
-      animation: fadeInDown 1s ease;
-    }
-    .hero p {
-      margin: 20px 0;
-      max-width: 600px;
-      line-height: 1.6;
-      animation: fadeInUp 1s ease;
-    }
-    .coming-soon {
-      margin-top: 30px;
-      font-weight: bold;
-      font-size: 1.2em;
-      color: var(--secondary);
-      animation: pulse 2s infinite;
-    }
-    @keyframes fadeInDown {
-      from {opacity: 0; transform: translateY(-20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes fadeInUp {
-      from {opacity: 0; transform: translateY(20px);}
-      to {opacity: 1; transform: translateY(0);}
-    }
-    @keyframes pulse {
-      0%,100% {opacity: 1;}
-      50% {opacity: 0.5;}
-    }
+        button {
+            background-color: #00a89a; /* Teal */
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
 
-    /* FEATURES */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-      gap: 20px;
-    }
-    .feature {
-      background: rgba(255,255,255,0.05);
-      border-radius: 15px;
-      padding: 30px;
-      transition: var(--transition);
-    }
-    body.light .feature {
-      background: rgba(0,0,0,0.05);
-    }
-    .feature:hover {
-      transform: translateY(-5px);
-    }
+        button:hover {
+            background-color: #00877d;
+        }
 
-    /* CONTACT */
-    .contact p {
-      margin: 10px 0;
-      font-size: 1.1em;
-    }
+        /* Header */
+        header {
+            background-color: rgba(0, 31, 31, 0.9);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-    /* FOOTER */
-    footer {
-      padding: 20px;
-      text-align: center;
-      background: #000;
-      color: #aaa;
-    }
-    body.light footer {
-      background: #eee;
-      color: #333;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
 
-    /* AZAMAN ASSISTANT */
-    .azaman-bubble {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: var(--primary);
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      box-shadow: 0 0 20px var(--secondary);
-      animation: glow 2s infinite alternate;
-      z-index: 2000;
-    }
-    .azaman-bubble img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-    }
-    @keyframes glow {
-      from {box-shadow: 0 0 10px var(--secondary);}
-      to {box-shadow: 0 0 25px var(--accent);}
-    }
-    .azaman-chat {
-      position: fixed;
-      bottom: 100px;
-      right: 20px;
-      width: 300px;
-      max-height: 400px;
-      background: rgba(20,20,20,0.95);
-      border-radius: 15px;
-      display: none;
-      flex-direction: column;
-      overflow: hidden;
-      box-shadow: 0 0 20px rgba(0,0,0,0.4);
-      z-index: 2000;
-    }
-    body.light .azaman-chat {
-      background: rgba(255,255,255,0.95);
-    }
-    .chat-header {
-      background: var(--primary);
-      color: #fff;
-      padding: 10px;
-      font-weight: bold;
-    }
-    .chat-messages {
-      flex: 1;
-      padding: 10px;
-      overflow-y: auto;
-      font-size: 0.9em;
-    }
-    .chat-input {
-      display: flex;
-      border-top: 1px solid #333;
-    }
-    .chat-input input {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      outline: none;
-    }
-    .chat-input button {
-      background: var(--secondary);
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
-    }
-  </style>
+        .logo-icon {
+            background-color: #ffd700;
+            color: #001f1f;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li a {
+            color: #f0f0f0;
+            font-weight: bold;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 20px 50px;
+            text-align: center;
+            background: linear-gradient(to bottom, #001f1f, #003333);
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            color: #ffd700;
+        }
+
+        .hero p {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 36px;
+            color: #ffd700;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Mobile Mockup */
+        .mobile-mockup {
+            margin: 50px auto;
+            max-width: 300px;
+            position: relative;
+        }
+
+        .mobile-mockup img {
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        /* Live Rates Section */
+        .live-rates {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .rate-cards {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .rate-card {
+            background-color: #003333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .rate-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .rate-value {
+            font-size: 32px;
+            color: #ffd700;
+        }
+
+        .tiers {
+            margin: 20px 0;
+        }
+
+        .tier {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            background-color: #003333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+        }
+
+        .step-number {
+            font-size: 48px;
+            color: #ffd700;
+        }
+
+        .success-stories {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .story {
+            background-color: #003333;
+            padding: 15px;
+            border-radius: 10px;
+            width: 250px;
+        }
+
+        /* Why Choose */
+        .why-choose {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .feature {
+            background-color: #003333;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        /* Ready to Start */
+        .ready-to-start {
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #00a89a;
+            background-color: #001f1f;
+            color: #f0f0f0;
+        }
+
+        .contact {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #003333;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(0, 31, 31, 0.9);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .quick-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .support-info {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        /* Animations */
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffd700; }
+            50% { text-shadow: 0 0 20px #ffd700; }
+            100% { text-shadow: 0 0 5px #ffd700; }
+        }
+
+        .hero h1 {
+            animation: glow 2s infinite;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stats, .buttons, .rate-cards, .steps, .success-stories, .features, .contact {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="logo">Azasure</div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#features">Features</a>
-      <a href="#contact">Contact</a>
-      <span class="toggle-mode">🌙</span>
-    </nav>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <h1>Welcome to Azasure</h1>
-    <p>The next-generation AI powered finance & lifestyle assistant, secured and designed for the future.</p>
-    <div class="coming-soon">Coming Soon on App Store & Play Store</div>
-  </section>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="logo-icon">A</div>
+            <span>AzaSure</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#trade-cards">Trade Cards</a></li>
+                <li><a href="#live-rates">Live Rates</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#support">Support</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <h2>About Azasure</h2>
-    <p>Azasure is built with cutting-edge AI technology to help you manage, grow, and secure your digital and financial lifestyle. With Azaman, our futuristic AI assistant, you can interact naturally, get insights instantly, and enjoy a seamless digital experience.</p>
-  </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Smart Money, Instant Results</h1>
+        <p>Nigeria's Most Trusted Platform 🏆</p>
+        <h2>Turn Your Gift Cards Into Instant Cash</h2>
+        <p>Get the highest rates in Nigeria. Trade iTunes, Amazon, Steam and more with our smart AI assistant. Zero stress, maximum profits!</p>
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-value">₦520</div>
+                <p>iTunes Rate/$</p>
+            </div>
+            <div class="stat">
+                <div class="stat-value">1 Min</div>
+                <p>Fast Payout</p>
+            </div>
+            <div class="stat">
+                <div class="stat-value">5,000+</div>
+                <p>Happy Users</p>
+            </div>
+        </div>
+        <div class="buttons">
+            <button onclick="showModal()">Start Trading Now 🚀</button>
+            <button>Check Live Rates 📊</button>
+        </div>
+        <div class="trust">
+            <p>5,000+ Active Traders ⭐⭐⭐⭐⭐ 4.9/5</p>
+        </div>
+    </section>
 
-  <!-- FEATURES -->
-  <section id="features">
-    <h2>Features</h2>
-    <div class="features">
-      <div class="feature">
-        <h3>AI Assistant</h3>
-        <p>Chat and interact with Azaman for smart insights and financial assistance.</p>
-      </div>
-      <div class="feature">
-        <h3>Futuristic Design</h3>
-        <p>Immersive UI with dark/light mode, animations, and 3D-inspired visuals.</p>
-      </div>
-      <div class="feature">
-        <h3>Secure Platform</h3>
-        <p>Advanced security and encryption built into every interaction.</p>
-      </div>
-      <div class="feature">
-        <h3>Global Reach</h3>
-        <p>Accessible from anywhere with multilingual and scalable support.</p>
-      </div>
+    <!-- Mobile Mockup (Creative Addition: Simulated Mobile View) -->
+    <section class="mobile-mockup">
+        <!-- You can add an image here, but since no upload, placeholder -->
+        <img src="placeholder-mobile.png" alt="AzaSure Mobile App">
+        <p>AzaSure Mobile App - Coming Soon on iOS & Android</p>
+    </section>
+
+    <!-- Live Rates -->
+    <section id="live-rates" class="live-rates">
+        <h2>Live Trading Rates</h2>
+        <p>Real-time rates updated every minute. No hidden fees, no surprises - just the best rates in Nigeria!</p>
+        <div class="rate-cards">
+            <div class="rate-card">
+                <div class="rate-icon">🎵</div>
+                <h3>iTunes Apple Gift Card</h3>
+                <div class="rate-value">₦520 per $1</div>
+                <div class="tiers">
+                    <div class="tier">$25 - $100 <span>₦520/$</span></div>
+                    <div class="tier">$100 - $500 <span>₦525/$</span></div>
+                    <div class="tier">$500+ <span>₦530/$</span></div>
+                </div>
+                <button>Trade iTunes Now</button>
+            </div>
+            <div class="rate-card">
+                <div class="rate-icon">📦</div>
+                <h3>Amazon Gift Card</h3>
+                <div class="rate-value">₦505 per $1</div>
+                <div class="tiers">
+                    <div class="tier">$25 - $100 <span>₦505/$</span></div>
+                    <div class="tier">$100 - $500 <span>₦510/$</span></div>
+                    <div class="tier">$500+ <span>₦515/$</span></div>
+                </div>
+                <button>Trade Amazon Now</button>
+            </div>
+            <div class="rate-card">
+                <div class="rate-icon">🎮</div>
+                <h3>Steam Wallet</h3>
+                <div class="rate-value">₦490 per $1</div>
+                <div class="tiers">
+                    <div class="tier">$25 - $100 <span>₦490/$</span></div>
+                    <div class="tier">$100 - $500 <span>₦495/$</span></div>
+                    <div class="tier">$500+ <span>₦500/$</span></div>
+                </div>
+                <button>Trade Steam Now</button>
+            </div>
+        </div>
+        <p>Live Updates: Rates are updated every minute based on market conditions. Lock in your rate by starting a trade now!</p>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <h2>How To Make Money In 3 Simple Steps</h2>
+        <p>No complex processes, no long waits. Just upload, verify, and get paid instantly!</p>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-icon">📱</div>
+                <h3>Upload Your Card</h3>
+                <p>Take a clear photo of your gift card or enter the details manually. Our smart system instantly recognizes the card type and value.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-icon">⚡</div>
+                <h3>Get Instant Quote</h3>
+                <p>Our AI verifies your card in seconds and gives you the best possible rate. No waiting, no guessing - just instant, transparent pricing.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-icon">💰</div>
+                <h3>Receive Your Money</h3>
+                <p>Money hits your account within 1 minute of confirmation. Bank transfer, mobile money, or crypto - your choice!</p>
+            </div>
+        </div>
+        <div class="success-stories">
+            <h3>Success Stories</h3>
+            <div class="story">
+                <div class="story-icon">🎉</div>
+                <h4>Kemi from Lagos</h4>
+                <p>"Traded my $200 iTunes card and got ₦104,000 in my account in 45 seconds!"</p>
+            </div>
+            <div class="story">
+                <div class="story-icon">🚀</div>
+                <h4>David from Abuja</h4>
+                <p>"Best rates I've ever seen! Made ₦500k last month just trading gift cards."</p>
+            </div>
+            <div class="story">
+                <div class="story-icon">💎</div>
+                <h4>Sarah from PH</h4>
+                <p>"The AI assistant makes everything so easy. I can trade cards while cooking!"</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose -->
+    <section class="why-choose">
+        <h2>Why Choose AzaSure?</h2>
+        <p>We're not just another trading platform - we're your money-making partner!</p>
+        <div class="features">
+            <div class="feature">
+                <div class="feature-icon">📈</div>
+                <h3>Highest Rates Guaranteed</h3>
+                <p>We monitor all competitors to ensure you always get the highest rates in Nigeria. If you find better rates elsewhere, we'll beat them!</p>
+                <p>₦520/$ Current iTunes Rate</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">⚡</div>
+                <h3>Lightning Fast Payouts</h3>
+                <p>Get your money in under 1 minute! Our automated system processes payments instantly once your card is verified. No delays, no excuses.</p>
+                <p>Average: 47 seconds</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🤖</div>
+                <h3>Smart AI Assistant</h3>
+                <p>Our AI speaks your language (literally!). Get help in Pidgin English, Yoruba, Hausa, or Igbo. It's like having a personal trading expert.</p>
+                <p>"Oga, your iTunes card go give you ₦52,000 today o! You wan trade am?"</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🔐</div>
+                <h3>Bank-Level Security</h3>
+                <p>Your money and data are protected with military-grade encryption. We're licensed and regulated, so you can trade with complete confidence.</p>
+                <p>SSL Encrypted • Regulated Platform</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">🎧</div>
+                <h3>24/7 Human Support</h3>
+                <p>Real humans available round the clock via WhatsApp, phone, or chat. No bots, no automated responses - just genuine help when you need it.</p>
+                <p>ultimatemadugba@gmail.com 📧</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">💳</div>
+                <h3>Multiple Payment Options</h3>
+                <p>Get paid via bank transfer, mobile money, or even cryptocurrency. Choose what works best for you - we support all major Nigerian banks.</p>
+                <p>🏦 📱 ₿ All Banks</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ready to Start -->
+    <section id="start-trading" class="ready-to-start">
+        <h2>Ready To Start Making Serious Money?</h2>
+        <p>Join over 5,000 smart Nigerians already making money with AzaSure. Your unused gift cards are sitting there losing value - let's change that today! 💰</p>
+        <div class="form">
+            <h3>Start Your First Trade</h3>
+            <select id="gift-card-type">
+                <option>Which gift card do you want to trade?</option>
+                <option>iTunes Gift Card</option>
+                <option>Amazon Gift Card</option>
+                <option>Steam Wallet</option>
+                <option>Google Play Gift Card</option>
+                <option>Other (I'll specify later)</option>
+            </select>
+            <button onclick="startTrade()">🚀 Start Making Money Now!</button>
+            <p>✅ No signup fees • ✅ Instant verification • ✅ Same-day payouts</p>
+        </div>
+        <div class="contact">
+            <div>
+                <p>📱 WhatsApp Us +234 808 245 9326</p>
+                <p>Click to start trading now!</p>
+            </div>
+            <div>
+                <p>📧 Email Support ultimatemadugba@gmail.com</p>
+                <p>Get personal assistance</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <h2>🎉 Welcome to AzaSure!</h2>
+        <p>Thanks for joining! We'll contact you within 10 minutes to help you make your first trade.</p>
+        <button onclick="closeModal()">Awesome! 🚀</button>
     </div>
-  </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="contact">
-    <h2>Contact Us</h2>
-    <p>Email: <a href="mailto:ultimatemadugba@gmail.com">ultimatemadugba@gmail.com</a></p>
-    <p>Phone: <a href="tel:+2348082459326">+234 08082459326</a></p>
-  </section>
+    <!-- Footer -->
+    <footer>
+        <div class="logo">
+            <div class="logo-icon">A</div>
+            <span>AzaSure</span>
+        </div>
+        <p>Smart Money, Instant Results</p>
+        <p>Nigeria's most trusted platform for trading gift cards and making instant money. Over 5,000 satisfied customers and counting!</p>
+        <p>Platform Online & Secure</p>
+        <ul class="quick-links">
+            <li>Live Rates</li>
+            <li>How It Works</li>
+            <li>Start Trading</li>
+            <li>Get Help</li>
+        </ul>
+        <div class="support-info">
+            <p>📱 +234 808 245 9326</p>
+            <p>📧 Email Support</p>
+            <p>⏰ 24/7 Available</p>
+            <p>🇳🇬 Based in Nigeria</p>
+        </div>
+        <p>© 2024 AzaSure Technologies. All rights reserved.</p>
+        <p>🏆 Nigeria's #1 Trading Platform • Online Now</p>
+    </footer>
 
-  <!-- FOOTER -->
-  <footer>
-    © 2025 Azasure. All rights reserved.
-  </footer>
+    <script>
+        function showModal() {
+            document.getElementById('modal').classList.add('show');
+        }
 
-  <!-- AZAMAN ASSISTANT -->
-  <div class="azaman-bubble">
-    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712108.png" alt="Azaman">
-  </div>
-  <div class="azaman-chat">
-    <div class="chat-header">Azaman Assistant</div>
-    <div class="chat-messages"></div>
-    <div class="chat-input">
-      <input type="text" placeholder="Type a message..."/>
-      <button>➤</button>
-    </div>
-  </div>
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+        }
 
-  <script>
-    // DARK/LIGHT MODE
-    const toggle = document.querySelector('.toggle-mode');
-    toggle.addEventListener('click', () => {
-      document.body.classList.toggle('light');
-      toggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
-    });
-
-    // AZAMAN CHAT
-    const bubble = document.querySelector('.azaman-bubble');
-    const chat = document.querySelector('.azaman-chat');
-    const messages = document.querySelector('.chat-messages');
-    const input = document.querySelector('.chat-input input');
-    const sendBtn = document.querySelector('.chat-input button');
-
-    bubble.addEventListener('click', () => {
-      chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
-    });
-
-    function addMessage(sender, text) {
-      const msg = document.createElement('div');
-      msg.textContent = sender + ": " + text;
-      messages.appendChild(msg);
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    sendBtn.addEventListener('click', () => {
-      const text = input.value.trim();
-      if(text){
-        addMessage("You", text);
-        input.value = "";
-        setTimeout(() => {
-          addMessage("Azaman","I’m here to assist you with Azasure. 🚀");
-        }, 800);
-      }
-    });
-
-    input.addEventListener('keypress', e => {
-      if(e.key === "Enter") sendBtn.click();
-    });
-  </script>
+        function startTrade() {
+            const type = document.getElementById('gift-card-type').value;
+            if (type !== "Which gift card do you want to trade?") {
+                alert(`Starting trade for ${type}! Processing...`);
+                showModal();
+            } else {
+                alert('Please select a gift card type.');
+            }
+        }
+    </script>
 </body>
 </html>
