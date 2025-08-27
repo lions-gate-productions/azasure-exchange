@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Azasure – AI Powered Finance</title>
+  <style>
+    /* GLOBAL STYLES */
+    :root {
+      --bg-light: #f8f9fa;
+      --bg-dark: #0a0a0a;
+      --text-light: #0a0a0a;
+      --text-dark: #f8f9fa;
+      --primary: #6a5acd;
+      --secondary: #00f7ff;
+      --accent: #ff0077;
+      --transition: 0.3s ease;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background var(--transition), color var(--transition);
+    }
+    body.light {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+    h1,h2,h3,h4 {
+      margin: 0;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    section {
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .btn {
+      background: var(--primary);
+      color: #fff;
+      padding: 12px 28px;
+      border-radius: 30px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      background: var(--accent);
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 40px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+    }
+    body.light header {
+      background: rgba(248,249,250,0.85);
+    }
+    header .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: var(--secondary);
+    }
+    nav a {
+      margin-left: 20px;
+      font-weight: 500;
+    }
+    .toggle-mode {
+      margin-left: 20px;
+      cursor: pointer;
+      font-size: 1.2em;
+    }
+
+    /* HERO */
+    .hero {
+      height: 90vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #0a0a0a, #1a0033);
+      color: #fff;
+      text-align: center;
+    }
+    body.light .hero {
+      background: linear-gradient(135deg, #f8f9fa, #dcdcdc);
+      color: #000;
+    }
+    .hero h1 {
+      font-size: 3em;
+      animation: fadeInDown 1s ease;
+    }
+    .hero p {
+      margin: 20px 0;
+      max-width: 600px;
+      line-height: 1.6;
+      animation: fadeInUp 1s ease;
+    }
+    .coming-soon {
+      margin-top: 30px;
+      font-weight: bold;
+      font-size: 1.2em;
+      color: var(--secondary);
+      animation: pulse 2s infinite;
+    }
+    @keyframes fadeInDown {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes fadeInUp {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+    @keyframes pulse {
+      0%,100% {opacity: 1;}
+      50% {opacity: 0.5;}
+    }
+
+    /* FEATURES */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+      gap: 20px;
+    }
+    .feature {
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      padding: 30px;
+      transition: var(--transition);
+    }
+    body.light .feature {
+      background: rgba(0,0,0,0.05);
+    }
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    /* CONTACT */
+    .contact p {
+      margin: 10px 0;
+      font-size: 1.1em;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 20px;
+      text-align: center;
+      background: #000;
+      color: #aaa;
+    }
+    body.light footer {
+      background: #eee;
+      color: #333;
+    }
+
+    /* AZAMAN ASSISTANT */
+    .azaman-bubble {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      box-shadow: 0 0 20px var(--secondary);
+      animation: glow 2s infinite alternate;
+      z-index: 2000;
+    }
+    .azaman-bubble img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    @keyframes glow {
+      from {box-shadow: 0 0 10px var(--secondary);}
+      to {box-shadow: 0 0 25px var(--accent);}
+    }
+    .azaman-chat {
+      position: fixed;
+      bottom: 100px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background: rgba(20,20,20,0.95);
+      border-radius: 15px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,0,0,0.4);
+      z-index: 2000;
+    }
+    body.light .azaman-chat {
+      background: rgba(255,255,255,0.95);
+    }
+    .chat-header {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px;
+      font-weight: bold;
+    }
+    .chat-messages {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      font-size: 0.9em;
+    }
+    .chat-input {
+      display: flex;
+      border-top: 1px solid #333;
+    }
+    .chat-input input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      outline: none;
+    }
+    .chat-input button {
+      background: var(--secondary);
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="logo">Azasure</div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#contact">Contact</a>
+      <span class="toggle-mode">🌙</span>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Welcome to Azasure</h1>
+    <p>The next-generation AI powered finance & lifestyle assistant, secured and designed for the future.</p>
+    <div class="coming-soon">Coming Soon on App Store & Play Store</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <h2>About Azasure</h2>
+    <p>Azasure is built with cutting-edge AI technology to help you manage, grow, and secure your digital and financial lifestyle. With Azaman, our futuristic AI assistant, you can interact naturally, get insights instantly, and enjoy a seamless digital experience.</p>
+  </section>
+
+  <!-- FEATURES -->
+  <section id="features">
+    <h2>Features</h2>
+    <div class="features">
+      <div class="feature">
+        <h3>AI Assistant</h3>
+        <p>Chat and interact with Azaman for smart insights and financial assistance.</p>
+      </div>
+      <div class="feature">
+        <h3>Futuristic Design</h3>
+        <p>Immersive UI with dark/light mode, animations, and 3D-inspired visuals.</p>
+      </div>
+      <div class="feature">
+        <h3>Secure Platform</h3>
+        <p>Advanced security and encryption built into every interaction.</p>
+      </div>
+      <div class="feature">
+        <h3>Global Reach</h3>
+        <p>Accessible from anywhere with multilingual and scalable support.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact">
+    <h2>Contact Us</h2>
+    <p>Email: <a href="mailto:ultimatemadugba@gmail.com">ultimatemadugba@gmail.com</a></p>
+    <p>Phone: <a href="tel:+2348082459326">+234 08082459326</a></p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2025 Azasure. All rights reserved.
+  </footer>
+
+  <!-- AZAMAN ASSISTANT -->
+  <div class="azaman-bubble">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712108.png" alt="Azaman">
+  </div>
+  <div class="azaman-chat">
+    <div class="chat-header">Azaman Assistant</div>
+    <div class="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" placeholder="Type a message..."/>
+      <button>➤</button>
+    </div>
+  </div>
+
+  <script>
+    // DARK/LIGHT MODE
+    const toggle = document.querySelector('.toggle-mode');
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle('light');
+      toggle.textContent = document.body.classList.contains('light') ? '☀️' : '🌙';
+    });
+
+    // AZAMAN CHAT
+    const bubble = document.querySelector('.azaman-bubble');
+    const chat = document.querySelector('.azaman-chat');
+    const messages = document.querySelector('.chat-messages');
+    const input = document.querySelector('.chat-input input');
+    const sendBtn = document.querySelector('.chat-input button');
+
+    bubble.addEventListener('click', () => {
+      chat.style.display = chat.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    function addMessage(sender, text) {
+      const msg = document.createElement('div');
+      msg.textContent = sender + ": " + text;
+      messages.appendChild(msg);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const text = input.value.trim();
+      if(text){
+        addMessage("You", text);
+        input.value = "";
+        setTimeout(() => {
+          addMessage("Azaman","I’m here to assist you with Azasure. 🚀");
+        }, 800);
+      }
+    });
+
+    input.addEventListener('keypress', e => {
+      if(e.key === "Enter") sendBtn.click();
+    });
+  </script>
+</body>
+</html>
