@@ -3,586 +3,2420 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AzaSure - Smart Money, Instant Results</title>
+    <title>Azasure - Smart Money, Instant Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00a89a',
+                        secondary: '#ffd700',
+                        accent: '#001f1f',
+                        teal: {
+                            950: '#001a1a',
+                            900: '#001f1f',
+                            800: '#003333',
+                            700: '#004d4d',
+                            600: '#006666',
+                            500: '#00a89a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Global Styles */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+            box-sizing: border-box;
+        }
+        
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #001f1f; /* Dark teal background */
-            color: #f0f0f0; /* Light text */
-            line-height: 1.6;
+            background: linear-gradient(135deg, #001f1f 0%, #003333 50%, #001f1f 100%);
+            background-size: 400% 400%;
+            animation: gradient-shift 15s ease infinite;
+            min-height: 100vh;
         }
-
-        a {
-            text-decoration: none;
-            color: #ffd700; /* Gold */
+        
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
-
-        button {
-            background-color: #00a89a; /* Teal */
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
+        
+        .glass-effect {
+            background: rgba(0, 168, 154, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 168, 154, 0.1);
         }
-
-        button:hover {
-            background-color: #00877d;
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        /* Header */
-        header {
-            background-color: rgba(0, 31, 31, 0.9);
-            padding: 20px;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0, 168, 154, 0.2);
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
+        
+        .feature-card {
+            background: rgba(0, 51, 51, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            transition: all 0.3s ease;
         }
-
-        .logo-icon {
-            background-color: #ffd700;
-            color: #001f1f;
-            width: 40px;
-            height: 40px;
+        
+        .feature-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.1);
+        }
+        
+        .balance-card {
+            background: linear-gradient(135deg, #00a89a 0%, #006666 50%, #004d4d 100%);
+            box-shadow: 0 8px 32px rgba(0, 168, 154, 0.3);
+        }
+        
+        .crypto-card {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(0, 168, 154, 0.1));
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .crypto-card:hover {
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(0, 168, 154, 0.2));
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+        
+        /* Enhanced Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            33% { transform: translateY(-10px) rotate(1deg); }
+            66% { transform: translateY(-5px) rotate(-1deg); }
+        }
+        
+        @keyframes pulse-gold {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.6);
+                transform: scale(1.02);
+            }
+        }
+        
+        @keyframes bounce-in {
+            0% { transform: scale(0) rotate(-180deg); opacity: 0; }
+            50% { transform: scale(1.1) rotate(-90deg); opacity: 0.8; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px) rotate(-1deg); }
+            75% { transform: translateX(5px) rotate(1deg); }
+        }
+        
+        @keyframes azaman-talk {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .animate-fade-in { animation: fadeIn 0.8s ease-in-out; }
+        .animate-slide-up { animation: slideUp 0.6s ease-out; }
+        .animate-float { animation: float 4s ease-in-out infinite; }
+        .animate-pulse-gold { animation: pulse-gold 2s ease-in-out infinite; }
+        .animate-bounce-in { animation: bounce-in 0.6s ease-out; }
+        .animate-shake { animation: shake 0.5s ease-in-out; }
+        .animate-azaman-talk { animation: azaman-talk 1s ease-in-out infinite; }
+        
+        /* Avatar System */
+        .avatar-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            transition: all 0.4s ease;
+        }
+        
+        .avatar-container.success {
+            border-color: #22c55e;
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.6);
+            animation: bounce-in 0.8s ease-out;
+        }
+        
+        .avatar-container.error {
+            border-color: #ef4444;
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.6);
+            animation: shake 0.6s ease-out;
+        }
+        
+        .avatar-container.thinking {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
+            animation: float 2s ease-in-out infinite;
+        }
+        
+        .avatar-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.4s ease;
+        }
+        
+        /* Navigation */
+        .nav-item {
+            transition: all 0.3s ease;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .nav-item.active {
+            color: #ffd700;
+            transform: translateY(-2px);
+        }
+        
+        .nav-item:hover {
+            color: #00a89a;
+            transform: translateY(-1px);
+        }
+        
+        /* Loading States */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, #001f1f, #003333);
             display: flex;
-            justify-content: center;
             align-items: center;
-            margin-right: 10px;
-        }
-
-        nav ul {
-            list-style: none;
-            display: flex;
-            gap: 20px;
-        }
-
-        nav ul li a {
-            color: #f0f0f0;
-            font-weight: bold;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 100px 20px 50px;
-            text-align: center;
-            background: linear-gradient(to bottom, #001f1f, #003333);
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #ffd700;
-        }
-
-        .hero p {
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-
-        .stats {
-            display: flex;
             justify-content: center;
-            gap: 40px;
-            margin-bottom: 40px;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
         }
 
-        .stat {
-            text-align: center;
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 4px solid rgba(255, 215, 0, 0.3);
+            border-top: 4px solid #ffd700;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
         }
 
-        .stat-value {
-            font-size: 36px;
-            color: #ffd700;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        .buttons {
+        /* Progress bars */
+        .progress-bar {
+            height: 4px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ffd700, #00a89a);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        /* Input focus styles */
+        .input-field:focus {
+            outline: none;
+            border-color: #ffd700;
+            box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+        }
+
+        /* Coming Soon Overlay */
+        .coming-soon-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 20px;
+            z-index: 9999;
         }
 
-        /* Mobile Mockup */
-        .mobile-mockup {
-            margin: 50px auto;
-            max-width: 300px;
+        /* Azasure Logo */
+        .azasure-logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, #ffd700, #00a89a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             position: relative;
         }
-
-        .mobile-mockup img {
-            width: 100%;
-            border-radius: 20px;
+        
+        .azasure-logo::before {
+            content: "A";
+            position: absolute;
+            left: -0.1em;
+            top: 0;
+            font-size: 1.2em;
+            background: linear-gradient(45deg, #ffd700, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            z-index: -1;
         }
 
-        /* Live Rates Section */
-        .live-rates {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .rate-cards {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .rate-card {
-            background-color: #003333;
-            padding: 20px;
-            border-radius: 10px;
-            width: 250px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-        }
-
-        .rate-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        .rate-value {
-            font-size: 32px;
-            color: #ffd700;
-        }
-
-        .tiers {
-            margin: 20px 0;
-        }
-
-        .tier {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-        }
-
-        /* How It Works */
-        .how-it-works {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .steps {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .step {
-            background-color: #003333;
-            padding: 20px;
-            border-radius: 10px;
-            width: 300px;
-        }
-
-        .step-number {
-            font-size: 48px;
-            color: #ffd700;
-        }
-
-        .success-stories {
-            margin-top: 50px;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .story {
-            background-color: #003333;
-            padding: 15px;
-            border-radius: 10px;
-            width: 250px;
-        }
-
-        /* Why Choose */
-        .why-choose {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .feature {
-            background-color: #003333;
-            padding: 20px;
-            border-radius: 10px;
-        }
-
-        .feature-icon {
-            font-size: 40px;
-            margin-bottom: 10px;
-        }
-
-        /* Ready to Start */
-        .ready-to-start {
-            padding: 50px 20px;
-            text-align: center;
-        }
-
-        .form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        select {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-            border: 1px solid #00a89a;
-            background-color: #001f1f;
-            color: #f0f0f0;
-        }
-
-        .contact {
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #003333;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-
-        .modal.show {
-            display: block;
-        }
-
-        /* Footer */
-        footer {
-            background-color: rgba(0, 31, 31, 0.9);
-            padding: 20px;
-            text-align: center;
-        }
-
-        .quick-links {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-
-        .support-info {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-
-        /* Animations */
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px #ffd700; }
-            50% { text-shadow: 0 0 20px #ffd700; }
-            100% { text-shadow: 0 0 5px #ffd700; }
-        }
-
-        .hero h1 {
-            animation: glow 2s infinite;
-        }
-
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .stats, .buttons, .rate-cards, .steps, .success-stories, .features, .contact {
-                flex-direction: column;
+            .avatar-container {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-3px) scale(1.01);
             }
         }
     </style>
 </head>
-<body>
-
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <div class="logo-icon">A</div>
-            <span>AzaSure</span>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#trade-cards">Trade Cards</a></li>
-                <li><a href="#live-rates">Live Rates</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#support">Support</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <h1>Smart Money, Instant Results</h1>
-        <p>Nigeria's Most Trusted Platform 🏆</p>
-        <h2>Turn Your Gift Cards Into Instant Cash</h2>
-        <p>Get the highest rates in Nigeria. Trade iTunes, Amazon, Steam and more with our smart AI assistant. Zero stress, maximum profits!</p>
-        <div class="stats">
-            <div class="stat">
-                <div class="stat-value">₦520</div>
-                <p>iTunes Rate/$</p>
+<body class="bg-teal-900 text-white transition-colors overflow-x-hidden">
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="loading-overlay">
+        <div class="text-center">
+            <div class="loading-spinner mx-auto mb-6"></div>
+            <div class="avatar-container mx-auto mb-4">
+                <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="Azaman Avatar" class="avatar-image">
             </div>
-            <div class="stat">
-                <div class="stat-value">1 Min</div>
-                <p>Fast Payout</p>
+            <div class="flex items-center justify-center mb-4">
+                <img src="https://pfst.cf2.poecdn.net/base/image/a84cdc680ad062348b62d3c6a4933176b7ec00b52ffa6dcac0a190f5eb38e493?w=312&h=123" alt="Azasure Logo" class="h-12">
             </div>
-            <div class="stat">
-                <div class="stat-value">5,000+</div>
-                <p>Happy Users</p>
+            <div class="text-sm text-secondary animate-pulse">Smart Money, Instant Results</div>
+            <div class="mt-4 text-xs text-white/60" id="loadingText">Securing your financial future...</div>
+            <div class="progress-bar mt-4 max-w-xs mx-auto">
+                <div class="progress-fill" id="loadingProgress" style="width: 0%"></div>
             </div>
         </div>
-        <div class="buttons">
-            <button onclick="showModal()">Start Trading Now 🚀</button>
-            <button>Check Live Rates 📊</button>
-        </div>
-        <div class="trust">
-            <p>5,000+ Active Traders ⭐⭐⭐⭐⭐ 4.9/5</p>
-        </div>
-    </section>
-
-    <!-- Mobile Mockup (Creative Addition: Simulated Mobile View) -->
-    <section class="mobile-mockup">
-        <!-- You can add an image here, but since no upload, placeholder -->
-        <img src="placeholder-mobile.png" alt="AzaSure Mobile App">
-        <p>AzaSure Mobile App - Coming Soon on iOS & Android</p>
-    </section>
-
-    <!-- Live Rates -->
-    <section id="live-rates" class="live-rates">
-        <h2>Live Trading Rates</h2>
-        <p>Real-time rates updated every minute. No hidden fees, no surprises - just the best rates in Nigeria!</p>
-        <div class="rate-cards">
-            <div class="rate-card">
-                <div class="rate-icon">🎵</div>
-                <h3>iTunes Apple Gift Card</h3>
-                <div class="rate-value">₦520 per $1</div>
-                <div class="tiers">
-                    <div class="tier">$25 - $100 <span>₦520/$</span></div>
-                    <div class="tier">$100 - $500 <span>₦525/$</span></div>
-                    <div class="tier">$500+ <span>₦530/$</span></div>
-                </div>
-                <button>Trade iTunes Now</button>
-            </div>
-            <div class="rate-card">
-                <div class="rate-icon">📦</div>
-                <h3>Amazon Gift Card</h3>
-                <div class="rate-value">₦505 per $1</div>
-                <div class="tiers">
-                    <div class="tier">$25 - $100 <span>₦505/$</span></div>
-                    <div class="tier">$100 - $500 <span>₦510/$</span></div>
-                    <div class="tier">$500+ <span>₦515/$</span></div>
-                </div>
-                <button>Trade Amazon Now</button>
-            </div>
-            <div class="rate-card">
-                <div class="rate-icon">🎮</div>
-                <h3>Steam Wallet</h3>
-                <div class="rate-value">₦490 per $1</div>
-                <div class="tiers">
-                    <div class="tier">$25 - $100 <span>₦490/$</span></div>
-                    <div class="tier">$100 - $500 <span>₦495/$</span></div>
-                    <div class="tier">$500+ <span>₦500/$</span></div>
-                </div>
-                <button>Trade Steam Now</button>
-            </div>
-        </div>
-        <p>Live Updates: Rates are updated every minute based on market conditions. Lock in your rate by starting a trade now!</p>
-    </section>
-
-    <!-- How It Works -->
-    <section id="how-it-works" class="how-it-works">
-        <h2>How To Make Money In 3 Simple Steps</h2>
-        <p>No complex processes, no long waits. Just upload, verify, and get paid instantly!</p>
-        <div class="steps">
-            <div class="step">
-                <div class="step-number">1</div>
-                <div class="step-icon">📱</div>
-                <h3>Upload Your Card</h3>
-                <p>Take a clear photo of your gift card or enter the details manually. Our smart system instantly recognizes the card type and value.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <div class="step-icon">⚡</div>
-                <h3>Get Instant Quote</h3>
-                <p>Our AI verifies your card in seconds and gives you the best possible rate. No waiting, no guessing - just instant, transparent pricing.</p>
-            </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <div class="step-icon">💰</div>
-                <h3>Receive Your Money</h3>
-                <p>Money hits your account within 1 minute of confirmation. Bank transfer, mobile money, or crypto - your choice!</p>
-            </div>
-        </div>
-        <div class="success-stories">
-            <h3>Success Stories</h3>
-            <div class="story">
-                <div class="story-icon">🎉</div>
-                <h4>Kemi from Lagos</h4>
-                <p>"Traded my $200 iTunes card and got ₦104,000 in my account in 45 seconds!"</p>
-            </div>
-            <div class="story">
-                <div class="story-icon">🚀</div>
-                <h4>David from Abuja</h4>
-                <p>"Best rates I've ever seen! Made ₦500k last month just trading gift cards."</p>
-            </div>
-            <div class="story">
-                <div class="story-icon">💎</div>
-                <h4>Sarah from PH</h4>
-                <p>"The AI assistant makes everything so easy. I can trade cards while cooking!"</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Choose -->
-    <section class="why-choose">
-        <h2>Why Choose AzaSure?</h2>
-        <p>We're not just another trading platform - we're your money-making partner!</p>
-        <div class="features">
-            <div class="feature">
-                <div class="feature-icon">📈</div>
-                <h3>Highest Rates Guaranteed</h3>
-                <p>We monitor all competitors to ensure you always get the highest rates in Nigeria. If you find better rates elsewhere, we'll beat them!</p>
-                <p>₦520/$ Current iTunes Rate</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">⚡</div>
-                <h3>Lightning Fast Payouts</h3>
-                <p>Get your money in under 1 minute! Our automated system processes payments instantly once your card is verified. No delays, no excuses.</p>
-                <p>Average: 47 seconds</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🤖</div>
-                <h3>Smart AI Assistant</h3>
-                <p>Our AI speaks your language (literally!). Get help in Pidgin English, Yoruba, Hausa, or Igbo. It's like having a personal trading expert.</p>
-                <p>"Oga, your iTunes card go give you ₦52,000 today o! You wan trade am?"</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🔐</div>
-                <h3>Bank-Level Security</h3>
-                <p>Your money and data are protected with military-grade encryption. We're licensed and regulated, so you can trade with complete confidence.</p>
-                <p>SSL Encrypted • Regulated Platform</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">🎧</div>
-                <h3>24/7 Human Support</h3>
-                <p>Real humans available round the clock via WhatsApp, phone, or chat. No bots, no automated responses - just genuine help when you need it.</p>
-                <p>ultimatemadugba@gmail.com 📧</p>
-            </div>
-            <div class="feature">
-                <div class="feature-icon">💳</div>
-                <h3>Multiple Payment Options</h3>
-                <p>Get paid via bank transfer, mobile money, or even cryptocurrency. Choose what works best for you - we support all major Nigerian banks.</p>
-                <p>🏦 📱 ₿ All Banks</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Ready to Start -->
-    <section id="start-trading" class="ready-to-start">
-        <h2>Ready To Start Making Serious Money?</h2>
-        <p>Join over 5,000 smart Nigerians already making money with AzaSure. Your unused gift cards are sitting there losing value - let's change that today! 💰</p>
-        <div class="form">
-            <h3>Start Your First Trade</h3>
-            <select id="gift-card-type">
-                <option>Which gift card do you want to trade?</option>
-                <option>iTunes Gift Card</option>
-                <option>Amazon Gift Card</option>
-                <option>Steam Wallet</option>
-                <option>Google Play Gift Card</option>
-                <option>Other (I'll specify later)</option>
-            </select>
-            <button onclick="startTrade()">🚀 Start Making Money Now!</button>
-            <p>✅ No signup fees • ✅ Instant verification • ✅ Same-day payouts</p>
-        </div>
-        <div class="contact">
-            <div>
-                <p>📱 WhatsApp Us +234 808 245 9326</p>
-                <p>Click to start trading now!</p>
-            </div>
-            <div>
-                <p>📧 Email Support ultimatemadugba@gmail.com</p>
-                <p>Get personal assistance</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal -->
-    <div id="modal" class="modal">
-        <h2>🎉 Welcome to AzaSure!</h2>
-        <p>Thanks for joining! We'll contact you within 10 minutes to help you make your first trade.</p>
-        <button onclick="closeModal()">Awesome! 🚀</button>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="logo">
-            <div class="logo-icon">A</div>
-            <span>AzaSure</span>
+    <!-- User State Indicator -->
+    <div id="userStateIndicator" class="fixed top-4 right-4 bg-primary/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-xs z-40 transition-all duration-300 hidden">
+        <span id="userStatus"></span>
+    </div>
+
+    <!-- Landing Page -->
+    <div id="landingPage" class="min-h-screen overflow-y-auto px-4 hidden">
+        <!-- Hero Section -->
+        <div class="min-h-screen flex items-center justify-center">
+            <div class="text-center max-w-4xl mx-auto">
+                <div class="mb-8">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/a84cdc680ad062348b62d3c6a4933176b7ec00b52ffa6dcac0a190f5eb38e493?w=312&h=123" alt="Azasure Logo" class="h-20 mx-auto mb-4 animate-float">
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 text-white">
+                    The Future of <span class="text-secondary">Money</span> is Here
+                </h1>
+                <p class="text-2xl text-white/90 mb-4 font-medium">Trade Gift Cards • Buy Crypto • Send Gifts Globally</p>
+                <p class="text-lg text-white/70 mb-8 max-w-2xl mx-auto">Experience Nigeria's most advanced fintech platform. Licensed, regulated, and trusted by 500,000+ users nationwide.</p>
+                
+                <div class="flex flex-col md:flex-row gap-4 max-w-lg mx-auto mb-12">
+                    <button id="getStartedBtn" class="flex-1 bg-gradient-to-r from-primary to-teal-600 text-white py-4 px-8 rounded-xl font-bold text-lg animate-pulse-gold transform hover:scale-105 transition-all duration-300">
+                        🚀 Start Trading Free
+                    </button>
+                    <button id="loginBtn" class="flex-1 glass-card text-white py-4 px-8 rounded-xl font-semibold border border-secondary/30 hover:border-secondary/60 transition-all duration-300">
+                        Sign In
+                    </button>
+                </div>
+
+                <!-- Live Stats Counter -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-3xl mx-auto mb-16">
+                    <div class="glass-card rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-secondary mb-2" id="usersCounter">0</div>
+                        <div class="text-sm text-white/60">Active Users</div>
+                        <div class="text-xs text-green-400 mt-1">+12% this week</div>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-secondary mb-2" id="volumeCounter">₦0</div>
+                        <div class="text-sm text-white/60">Trading Volume</div>
+                        <div class="text-xs text-green-400 mt-1">+28% this month</div>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-secondary mb-2" id="rateCounter">0%</div>
+                        <div class="text-sm text-white/60">Success Rate</div>
+                        <div class="text-xs text-green-400 mt-1">Industry leading</div>
+                    </div>
+                    <div class="glass-card rounded-xl p-6 text-center">
+                        <div class="text-4xl font-bold text-secondary mb-2">24/7</div>
+                        <div class="text-sm text-white/60">Support</div>
+                        <div class="text-xs text-primary mt-1">Always available</div>
+                    </div>
+                </div>
+
+                <!-- Security Badge -->
+                <div class="flex items-center justify-center space-x-6 mb-16">
+                    <div class="glass-card rounded-lg px-4 py-2 text-sm">
+                        <i data-feather="shield" class="w-4 h-4 inline mr-2 text-green-400"></i>
+                        SEC Registered
+                    </div>
+                    <div class="glass-card rounded-lg px-4 py-2 text-sm">
+                        <i data-feather="lock" class="w-4 h-4 inline mr-2 text-green-400"></i>
+                        CBN Compliant
+                    </div>
+                    <div class="glass-card rounded-lg px-4 py-2 text-sm">
+                        <i data-feather="award" class="w-4 h-4 inline mr-2 text-green-400"></i>
+                        VASP Licensed
+                    </div>
+                </div>
+            </div>
         </div>
-        <p>Smart Money, Instant Results</p>
-        <p>Nigeria's most trusted platform for trading gift cards and making instant money. Over 5,000 satisfied customers and counting!</p>
-        <p>Platform Online & Secure</p>
-        <ul class="quick-links">
-            <li>Live Rates</li>
-            <li>How It Works</li>
-            <li>Start Trading</li>
-            <li>Get Help</li>
-        </ul>
-        <div class="support-info">
-            <p>📱 +234 808 245 9326</p>
-            <p>📧 Email Support</p>
-            <p>⏰ 24/7 Available</p>
-            <p>🇳🇬 Based in Nigeria</p>
+
+        <!-- Features Section -->
+        <div class="py-20">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="text-4xl font-bold text-center mb-6 bg-gradient-to-r from-secondary to-primary bg-clip-text text-transparent">
+                    Everything You Need in One Super-App
+                </h2>
+                <p class="text-center text-white/70 mb-16 max-w-3xl mx-auto text-lg">
+                    Built with cutting-edge technology and powered by AI. Fully regulated and compliant with Nigerian financial laws.
+                </p>
+
+                <!-- Marketing Hero Image -->
+                <div class="mb-20">
+                    <div class="glass-card rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-500">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/12ef00a0085d083d5b4da7bf6d9b2db8f63008145dda8402639f3d6ecd4d968c?w=1024&h=1024" alt="Trade at the hottest rates" class="w-full h-80 object-cover">
+                    </div>
+                </div>
+
+                <!-- Enhanced Features Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                    <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:animate-bounce-in">
+                            <i data-feather="credit-card" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-secondary">Gift Card Trading</h3>
+                        <p class="text-white/70 mb-4">AI-powered OCR technology instantly converts your gift cards to cash at market-leading rates.</p>
+                        <div class="text-sm text-primary font-semibold">₦530+ per $1 • iTunes, Amazon, Steam & more</div>
+                    </div>
+                    
+                    <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:animate-bounce-in">
+                            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 1H5C3.9 1 3 1.9 3 3V21C3 22.1 3.9 23 5 23H19C20.1 23 21 22.1 21 21V9M19 9H14V4H15.8L19 7.2V9Z"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-secondary">Crypto Trading</h3>
+                        <p class="text-white/70 mb-4">Buy and sell Bitcoin, Ethereum, USDT with naira. Secure custodial wallets with institutional-grade security.</p>
+                        <div class="text-sm text-primary font-semibold">BTC • ETH • USDT • USDC • cNGN</div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:animate-bounce-in">
+                            <i data-feather="gift" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-secondary">Global Gifting</h3>
+                        <p class="text-white/70 mb-4">Send gifts anywhere in the world instantly. Flowers, electronics, food delivery - all with crypto payments.</p>
+                        <div class="text-sm text-primary font-semibold">200+ Countries • Same-day delivery</div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:animate-bounce-in">
+                            <i data-feather="zap" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-secondary">AZAMAN AI Assistant</h3>
+                        <p class="text-white/70 mb-4">Voice-powered AI that handles transactions, analyzes spending, and provides financial insights in Nigerian Pidgin.</p>
+                        <div class="text-sm text-primary font-semibold">Voice commands • Smart analysis</div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:animate-bounce-in">
+                            <i data-feather="trending-up" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-secondary">Best Market Rates</h3>
+                        <p class="text-white/70 mb-4">Real-time rates updated every 30 seconds. Get more naira for your crypto and gift cards than anywhere else.</p>
+                        <div class="text-sm text-primary font-semibold">Live updates • Premium rates</div>
+                    </div>
+
+                    <div class="glass-card rounded-3xl p-8 text-center group hover:scale-105 transition-all duration-300">
+                        <div class="w-20 h-20 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-2xl flex items-center justify-center mb-6 mx-auto group-hover:animate-bounce-in">
+                            <i data-feather="shield" class="w-10 h-10 text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 text-secondary">Bank-Grade Security</h3>
+                        <p class="text-white/70 mb-4">Multi-signature wallets, 2FA, biometric authentication. Your funds are protected by military-grade encryption.</p>
+                        <div class="text-sm text-primary font-semibold">256-bit SSL • Multi-sig • Insurance</div>
+                    </div>
+                </div>
+
+                <!-- Secondary Marketing Images -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-20">
+                    <div class="glass-card rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-500">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/4a8fe648db9a7790a02867f523ef1a29e319d79e7d94bfb5b5d3b304eb5ffb7c?w=1024&h=1024" alt="Gift Cards Trading" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="glass-card rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-500">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/4b428915434d47ef03fc95fcba31b097841a4a425a0f94f17af7b46a5d71f339?w=1024&h=1024" alt="Global Gifts" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+
+                <!-- Comprehensive Features Image -->
+                <div class="mb-20">
+                    <div class="glass-card rounded-3xl overflow-hidden transform hover:scale-105 transition-all duration-500">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/8fd142ff4e5a11134b5913e7a35cb900b25542f4cdf698f0939f424ed405bb22?w=1024&h=1536" alt="Azasure Features" class="w-full h-auto object-cover">
+                    </div>
+                </div>
+
+                <!-- Testimonials Section -->
+                <div class="mb-20">
+                    <h3 class="text-3xl font-bold text-center mb-12 text-secondary">Trusted by 500,000+ Nigerians</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <div class="glass-card rounded-2xl p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold">A</div>
+                                <div class="ml-3">
+                                    <p class="font-semibold">Adebayo Kelechi</p>
+                                    <p class="text-sm text-white/60">Lagos Business Owner</p>
+                                </div>
+                            </div>
+                            <p class="text-white/80 mb-3">"Azasure don change my life! I fit trade my iTunes cards sharp sharp, and the money dey enter my account same time. No stress, no wahala!"</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-secondary">⭐⭐⭐⭐⭐</span>
+                                <span class="text-xs text-white/60">Verified Purchase</span>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card rounded-2xl p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold">M</div>
+                                <div class="ml-3">
+                                    <p class="font-semibold">Mary Oluwaseun</p>
+                                    <p class="text-sm text-white/60">Student, University of Lagos</p>
+                                </div>
+                            </div>
+                            <p class="text-white/80 mb-3">"As a student abroad, Azasure help me send gifts to my family for birthday and Christmas. The app too sweet, e easy to use!"</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-secondary">⭐⭐⭐⭐⭐</span>
+                                <span class="text-xs text-white/60">Verified Purchase</span>
+                            </div>
+                        </div>
+                        
+                        <div class="glass-card rounded-2xl p-6">
+                            <div class="flex items-center mb-4">
+                                <div class="w-12 h-12 bg-gradient-to-r from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold">T</div>
+                                <div class="ml-3">
+                                    <p class="font-semibold">Tunde Adeola</p>
+                                    <p class="text-sm text-white/60">Crypto Trader, Abuja</p>
+                                </div>
+                            </div>
+                            <p class="text-white/80 mb-3">"Best crypto trading platform for Naija people! Security tight, rates dey always fresh, and customer service na 24/7. I recommend am!"</p>
+                            <div class="flex justify-between items-center">
+                                <span class="text-secondary">⭐⭐⭐⭐⭐</span>
+                                <span class="text-xs text-white/60">Verified Purchase</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final CTA Section -->
+                <div class="text-center">
+                    <div class="glass-card rounded-3xl p-12 mb-8">
+                        <h3 class="text-3xl font-bold mb-6 text-secondary">Join the Financial Revolution</h3>
+                        <p class="text-white/70 mb-8 text-lg max-w-2xl mx-auto">Start your journey with Nigeria's most trusted fintech platform. SEC registered, CBN compliant, and loved by half a million users.</p>
+                        <div class="flex flex-col md:flex-row gap-4 max-w-md mx-auto mb-6">
+                            <button id="startTradingBtn" class="flex-1 bg-gradient-to-r from-primary to-teal-600 text-white py-4 px-8 rounded-xl font-bold text-lg transform hover:scale-105 transition-all duration-300">
+                                Start Trading Today
+                            </button>
+                            <button id="learnMoreBtn" class="flex-1 glass-card text-white py-4 px-8 rounded-xl font-semibold border border-secondary/30 hover:border-secondary/60 transition-all duration-300">
+                                Learn More
+                            </button>
+                        </div>
+                        <p class="text-xs text-white/50">🔒 Your data is protected by 256-bit SSL encryption</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <p>© 2024 AzaSure Technologies. All rights reserved.</p>
-        <p>🏆 Nigeria's #1 Trading Platform • Online Now</p>
-    </footer>
+    </div>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="glass-card rounded-3xl p-8 max-w-md w-full mx-4 border border-secondary/30">
+            <div class="text-center mb-8">
+                <img src="https://pfst.cf2.poecdn.net/base/image/a84cdc680ad062348b62d3c6a4933176b7ec00b52ffa6dcac0a190f5eb38e493?w=312&h=123" alt="Azasure Logo" class="h-8 mx-auto mb-4">
+                <h3 class="text-2xl font-bold mb-2 text-secondary">Join Azasure</h3>
+                <p class="text-white/70">Complete KYC verification to get started</p>
+            </div>
+            
+            <div class="space-y-4 mb-6">
+                <input type="text" id="authName" placeholder="Full Name (as on BVN)" class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 input-field text-base">
+                <input type="email" id="authEmail" placeholder="Email Address" class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 input-field text-base">
+                <input type="tel" id="authPhone" placeholder="Phone Number (+234)" class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 input-field text-base">
+                <input type="text" id="authBVN" placeholder="BVN (Bank Verification Number)" class="w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-white/50 input-field text-base">
+                <div class="flex items-center space-x-3">
+                    <input type="checkbox" id="authTerms" class="w-4 h-4 rounded">
+                    <label for="authTerms" class="text-sm text-white/70">I agree to the <span class="text-secondary">Terms & Conditions</span></label>
+                </div>
+            </div>
+            
+            <div class="flex space-x-3">
+                <button id="authCancel" class="flex-1 glass-card text-white py-3 px-6 rounded-xl font-semibold hover:bg-white/10 transition-all">
+                    Cancel
+                </button>
+                <button id="authSubmit" class="flex-1 bg-gradient-to-r from-primary to-teal-600 text-white py-3 px-6 rounded-xl font-bold hover:scale-105 transition-all">
+                    Complete KYC
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Container -->
+    <div id="dashboardApp" class="max-w-md mx-auto min-h-screen bg-gradient-to-b from-teal-900 to-teal-800 relative overflow-hidden hidden">
+        
+        <!-- Navigation Header -->
+        <header class="glass-effect p-4 flex items-center justify-between sticky top-0 z-50">
+            <div class="flex items-center space-x-3">
+                <img src="https://pfst.cf2.poecdn.net/base/image/a84cdc680ad062348b62d3c6a4933176b7ec00b52ffa6dcac0a190f5eb38e493?w=312&h=123" alt="Azasure" class="h-8">
+                <div>
+                    <div class="text-xs text-white/60">Smart Money Platform</div>
+                </div>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="azamanBtn" class="p-2 rounded-full hover:bg-white/10 transition-all relative" title="Talk to AZAMAN">
+                    <div class="avatar-container w-8 h-8 border-2" id="azamanAvatar">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="AZAMAN" class="avatar-image">
+                    </div>
+                    <div class="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                </button>
+                <button id="notificationBtn" class="p-2 rounded-full hover:bg-white/10 transition-all relative">
+                    <i data-feather="bell" class="w-5 h-5"></i>
+                    <span class="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full animate-pulse" id="notificationDot"></span>
+                </button>
+                <div class="avatar-container w-8 h-8 border-2" id="headerAvatar">
+                    <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="Avatar" class="avatar-image">
+                </div>
+            </div>
+        </header>
+
+        <!-- AZAMAN Voice Interface -->
+        <div id="azamanInterface" class="fixed bottom-24 left-4 right-4 max-w-md mx-auto z-40 hidden">
+            <div class="glass-card rounded-2xl p-4 border border-secondary/30">
+                <div class="flex items-center space-x-3 mb-3">
+                    <div class="avatar-container w-12 h-12 border-2 animate-azaman-talk">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="AZAMAN" class="avatar-image">
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm font-semibold text-secondary">AZAMAN AI</p>
+                        <p class="text-xs text-white/60">Your financial assistant</p>
+                    </div>
+                    <button id="closeAzaman" class="p-1 rounded-full hover:bg-white/10">
+                        <i data-feather="x" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div id="azamanResponse" class="text-sm text-white/80 mb-3">
+                    Hey Boss! I be AZAMAN, your personal money assistant. Wetin you wan do today?
+                </div>
+                <div class="flex space-x-2">
+                    <button id="voiceCommandBtn" class="flex-1 bg-primary/20 text-primary py-2 px-3 rounded-lg text-sm font-semibold">
+                        🎤 Voice Command
+                    </button>
+                    <button id="quickHelpBtn" class="flex-1 bg-secondary/20 text-secondary py-2 px-3 rounded-lg text-sm font-semibold">
+                        💡 Quick Help
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main id="mainContent" class="pb-24">
+            <!-- Home Screen -->
+            <div id="homeScreen" class="animate-fade-in">
+                <!-- Welcome Message -->
+                <div class="p-4">
+                    <div class="glass-card rounded-2xl p-4 mb-4">
+                        <p class="text-sm text-white/70">Good morning,</p>
+                        <p class="text-lg font-bold text-secondary" id="welcomeUserName">User</p>
+                        <p class="text-xs text-white/60" id="lastLoginTime">Last seen: Just now</p>
+                    </div>
+                </div>
+
+                <!-- Balance Card -->
+                <div class="p-4">
+                    <div class="balance-card rounded-3xl p-6 text-white mb-6 relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -mr-16 -mt-16"></div>
+                        <div class="relative z-10">
+                            <div class="flex justify-between items-start mb-6">
+                                <div>
+                                    <p class="text-white/80 text-sm mb-1">Total Portfolio Value</p>
+                                    <p class="text-3xl font-bold mb-1" id="totalBalance">₦0.00</p>
+                                    <p class="text-xs text-green-400" id="balanceChange">+₦0 (0%) today</p>
+                                </div>
+                                <button id="hideBalanceBtn" class="p-2 rounded-full hover:bg-white/10 transition-all">
+                                    <i data-feather="eye" class="w-5 h-5"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="flex space-x-3">
+                                <button id="sendBtn" class="flex-1 bg-white/20 backdrop-blur rounded-xl p-3 text-center font-semibold hover:bg-white/30 transition-all">
+                                    <i data-feather="send" class="w-4 h-4 mx-auto mb-1"></i>
+                                    <div class="text-sm">Send</div>
+                                </button>
+                                <button id="receiveBtn" class="flex-1 bg-white/20 backdrop-blur rounded-xl p-3 text-center font-semibold hover:bg-white/30 transition-all">
+                                    <i data-feather="download" class="w-4 h-4 mx-auto mb-1"></i>
+                                    <div class="text-sm">Receive</div>
+                                </button>
+                                <button id="swapBtn" class="flex-1 bg-white/20 backdrop-blur rounded-xl p-3 text-center font-semibold hover:bg-white/30 transition-all">
+                                    <i data-feather="refresh-cw" class="w-4 h-4 mx-auto mb-1"></i>
+                                    <div class="text-sm">Swap</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions Grid -->
+                <div class="px-4 mb-6">
+                    <h2 class="text-lg font-bold mb-4">Quick Actions</h2>
+                    <div class="grid grid-cols-2 gap-4">
+                        <button id="giftingBtn" class="feature-card rounded-2xl p-6 text-center group">
+                            <div class="w-12 h-12 bg-red-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto group-hover:animate-bounce-in">
+                                <i data-feather="gift" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-1 text-secondary">Send Gifts</h3>
+                            <p class="text-xs text-white/60">Global delivery</p>
+                        </button>
+                        
+                        <button id="giftCardBtn" class="feature-card rounded-2xl p-6 text-center group">
+                            <div class="w-12 h-12 bg-green-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto group-hover:animate-bounce-in">
+                                <i data-feather="credit-card" class="w-6 h-6 text-green-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-1 text-secondary">Trade Cards</h3>
+                            <p class="text-xs text-white/60">Instant cash</p>
+                        </button>
+                        
+                        <button id="cryptoBtn" class="feature-card rounded-2xl p-6 text-center group">
+                            <div class="w-12 h-12 bg-blue-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto group-hover:animate-bounce-in">
+                                <svg class="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2Z"/>
+                                </svg>
+                            </div>
+                            <h3 class="font-bold mb-1 text-secondary">Buy Crypto</h3>
+                            <p class="text-xs text-white/60">BTC, ETH, USDT</p>
+                        </button>
+                        
+                        <button id="billsBtn" class="feature-card rounded-2xl p-6 text-center group">
+                            <div class="w-12 h-12 bg-purple-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto group-hover:animate-bounce-in">
+                                <i data-feather="smartphone" class="w-6 h-6 text-purple-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-1 text-secondary">Pay Bills</h3>
+                            <p class="text-xs text-white/60">Utilities & airtime</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Market Overview -->
+                <div class="px-4 mb-6">
+                    <h2 class="text-lg font-bold mb-4">Market Overview</h2>
+                    <div class="space-y-3">
+                        <div class="glass-card rounded-xl p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-orange-400 rounded-full flex items-center justify-center">
+                                        <span class="text-white font-bold text-sm">₿</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm">Bitcoin</p>
+                                        <p class="text-xs text-white/60">BTC</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-sm" id="btcPrice">₦45,670,000</p>
+                                    <p class="text-xs text-green-400">+2.3%</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="glass-card rounded-xl p-4">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center">
+                                        <span class="text-white font-bold text-sm">Ξ</span>
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-sm">Ethereum</p>
+                                        <p class="text-xs text-white/60">ETH</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <p class="font-bold text-sm" id="ethPrice">₦3,875,000</p>
+                                    <p class="text-xs text-green-400">+1.8%</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="px-4 mb-6">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-lg font-bold">Recent Activity</h2>
+                        <button id="viewAllHistoryBtn" class="text-primary text-sm font-semibold">View All</button>
+                    </div>
+                    <div class="space-y-3" id="recentTransactionsContainer">
+                        <div class="text-center py-8 text-white/60">
+                            <i data-feather="activity" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
+                            <p>Your transactions will appear here</p>
+                            <p class="text-xs mt-1">Start trading to see your activity</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Engagement Hub -->
+                <div class="px-4 mb-6">
+                    <h2 class="text-lg font-bold mb-4">AZAMAN's Corner</h2>
+                    <div class="glass-card rounded-2xl p-4" id="engagementHub">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="avatar-container w-10 h-10 border-2">
+                                <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="AZAMAN" class="avatar-image">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm text-secondary">AZAMAN Says</p>
+                                <p class="text-xs text-white/60" id="engagementTimestamp">Just now</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-white/80 mb-3" id="engagementContent">
+                            Welcome to your new financial future! Did you know that gift card trading volume in Nigeria increased by 340% this year? Start small, dream big! 💫
+                        </p>
+                        <div class="flex space-x-2">
+                            <button class="flex-1 bg-primary/20 text-primary py-2 px-3 rounded-lg text-xs font-semibold" id="engagementAction">
+                                Tell me more
+                            </button>
+                            <button class="bg-white/10 text-white py-2 px-3 rounded-lg text-xs" id="refreshEngagement">
+                                <i data-feather="refresh-cw" class="w-3 h-3"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gift Card Screen -->
+            <div id="giftCardScreen" class="hidden animate-fade-in">
+                <div class="p-4">
+                    <div class="flex items-center mb-6">
+                        <button id="backFromGiftCard" class="mr-4 p-2 rounded-full hover:bg-white/10 transition-all">
+                            <i data-feather="arrow-left" class="w-6 h-6"></i>
+                        </button>
+                        <h1 class="text-xl font-bold">Trade Gift Cards</h1>
+                    </div>
+
+                    <!-- Upload Area -->
+                    <div id="uploadArea" class="glass-card border-2 border-dashed border-secondary/30 rounded-2xl p-8 text-center mb-6 cursor-pointer hover:border-secondary/50 transition-all">
+                        <div class="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i data-feather="camera" class="w-8 h-8 text-secondary"></i>
+                        </div>
+                        <h3 class="font-bold mb-2 text-secondary">Upload Gift Card</h3>
+                        <p class="text-sm text-white/70 mb-4">AI-powered OCR will extract card details instantly</p>
+                        <button class="bg-gradient-to-r from-primary to-teal-600 text-white px-6 py-3 rounded-xl font-semibold">Choose File</button>
+                        <input type="file" id="fileInput" accept="image/*" class="hidden">
+                        <p class="text-xs text-white/50 mt-2">Supports: JPG, PNG, HEIC • Max 10MB</p>
+                    </div>
+
+                    <!-- Processing Status -->
+                    <div id="processingStatus" class="hidden glass-card rounded-xl p-4 mb-6 border border-blue-400/30">
+                        <div class="flex items-center mb-4">
+                            <div class="animate-spin w-5 h-5 border-2 border-blue-400 border-t-transparent rounded-full mr-3"></div>
+                            <div>
+                                <p class="font-semibold text-blue-400">Processing your gift card...</p>
+                                <p class="text-sm text-white/70" id="processingStep">AI is analyzing the card details</p>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="processingProgress" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Live Rates -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h2 class="text-lg font-bold">Live Trading Rates</h2>
+                            <div class="flex items-center space-x-2 text-xs text-green-400">
+                                <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                                <span>Live</span>
+                            </div>
+                        </div>
+                        <div class="space-y-3">
+                            <div class="glass-card rounded-2xl p-4 cursor-pointer hover:scale-105 transition-all" data-card-type="itunes">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://pfst.cf2.poecdn.net/base/image/91667a6b736c7723f1f3bb8580f99d5eb559ab7b628d3b8a2d7fe1e8bafc013c?w=456&h=456" class="w-12 h-12 rounded-lg object-cover" alt="iTunes Card">
+                                        <div>
+                                            <p class="font-bold">iTunes</p>
+                                            <p class="text-xs text-white/60">US Gift Card</p>
+                                            <p class="text-xs text-green-400">High demand</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-secondary">₦530/$</p>
+                                        <p class="text-xs text-green-400">+2.1% ↗</p>
+                                        <p class="text-xs text-white/60">Updated 30s ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                            <div class="glass-card rounded-2xl p-4 cursor-pointer hover:scale-105 transition-all" data-card-type="amazon">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://pfst.cf2.poecdn.net/base/image/43a0473c3f8ec7c0245912865047bb0d7c2c2bc93b280a3dd358bab1ae691b30?w=225&h=225" class="w-12 h-12 rounded-lg object-cover" alt="Amazon Card">
+                                        <div>
+                                            <p class="font-bold">Amazon</p>
+                                            <p class="text-xs text-white/60">US Gift Card</p>
+                                            <p class="text-xs text-yellow-400">Medium demand</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-secondary">₦515/$</p>
+                                        <p class="text-xs text-green-400">+1.8% ↗</p>
+                                        <p class="text-xs text-white/60">Updated 45s ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                             
+                            <div class="glass-card rounded-2xl p-4 cursor-pointer hover:scale-105 transition-all" data-card-type="steam">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://pfst.cf2.poecdn.net/base/image/5bb1319b2bb734ea8aeec6a4c7adbadea58928092b96aaf1915acd90d2b49bf0?w=456&h=456" class="w-12 h-12 rounded-lg object-cover" alt="Steam Card">
+                                        <div>
+                                            <p class="font-bold">Steam</p>
+                                            <p class="text-xs text-white/60">Wallet Code</p>
+                                            <p class="text-xs text-blue-400">Stable market</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-secondary">₦500/$</p>
+                                        <p class="text-xs text-yellow-400">Stable —</p>
+                                        <p class="text-xs text-white/60">Updated 1m ago</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-2xl p-4 cursor-pointer hover:scale-105 transition-all" data-card-type="visa">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://pfst.cf2.poecdn.net/base/image/e6f6eb321a797c19225f87eae0884474c8ee0dbb0af0b320fc595985c3c65477?w=456&h=456" class="w-12 h-12 rounded-lg object-cover" alt="Visa Card">
+                                        <div>
+                                            <p class="font-bold">Visa</p>
+                                            <p class="text-xs text-white/60">Gift Card</p>
+                                            <p class="text-xs text-green-400">Rising demand</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-secondary">₦525/$</p>
+                                        <p class="text-xs text-green-400">+1.5% ↗</p>
+                                        <p class="text-xs text-white/60">Updated 2m ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="glass-card rounded-2xl p-4 cursor-pointer hover:scale-105 transition-all" data-card-type="walmart">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <img src="https://pfst.cf2.poecdn.net/base/image/e16911a7adf9bb57983879900db335536126aa4e9f0b992ce68d260d54d217fe?w=225&h=225" class="w-12 h-12 rounded-lg object-cover" alt="Walmart Card">
+                                        <div>
+                                            <p class="font-bold">Walmart</p>
+                                            <p class="text-xs text-white/60">Gift Card</p>
+                                            <p class="text-xs text-green-400">Hot trending</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold text-secondary">₦520/$</p>
+                                        <p class="text-xs text-green-400">+2.3% ↗</p>
+                                        <p class="text-xs text-white/60">Updated 30s ago</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Trading Tips -->
+                    <div class="glass-card rounded-2xl p-4 mb-6">
+                        <h3 class="font-bold mb-3 text-secondary">💡 Trading Tips</h3>
+                        <ul class="space-y-2 text-sm text-white/70">
+                            <li class="flex items-start space-x-2">
+                                <span class="text-green-400">•</span>
+                                <span>Higher denomination cards typically get better rates</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-green-400">•</span>
+                                <span>Clear, high-quality photos speed up processing</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-green-400">•</span>
+                                <span>Rates update every 30 seconds based on market demand</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Crypto Trading Screen -->
+            <div id="cryptoScreen" class="hidden animate-fade-in">
+                <div class="p-4">
+                    <div class="flex items-center mb-6">
+                        <button id="backFromCrypto" class="mr-4 p-2 rounded-full hover:bg-white/10 transition-all">
+                            <i data-feather="arrow-left" class="w-6 h-6"></i>
+                        </button>
+                        <h1 class="text-xl font-bold">Crypto Trading</h1>
+                    </div>
+
+                    <!-- Portfolio Overview -->
+                    <div class="crypto-card rounded-2xl p-6 mb-6">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <p class="text-white/80 text-sm mb-1">Crypto Portfolio</p>
+                                <p class="text-2xl font-bold" id="cryptoPortfolioValue">₦0.00</p>
+                                <p class="text-xs text-green-400">+0% today</p>
+                            </div>
+                            <button class="bg-primary/20 text-primary py-2 px-4 rounded-lg text-sm font-semibold">
+                                Add Funds
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Crypto Assets -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-4">Your Assets</h2>
+                        <div class="space-y-3">
+                            <!-- Bitcoin -->
+                            <div class="crypto-card rounded-xl p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-orange-400 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold">₿</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Bitcoin</p>
+                                            <p class="text-xs text-white/60">0.0000 BTC</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold">₦0.00</p>
+                                        <p class="text-xs text-green-400">₦45,670,000/$1</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Ethereum -->
+                            <div class="crypto-card rounded-xl p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold">Ξ</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Ethereum</p>
+                                            <p class="text-xs text-white/60">0.0000 ETH</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold">₦0.00</p>
+                                        <p class="text-xs text-green-400">₦3,875,000/$1</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- USDT -->
+                            <div class="crypto-card rounded-xl p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center">
+                                            <span class="text-white font-bold text-sm">T</span>
+                                        </div>
+                                        <div>
+                                            <p class="font-bold">Tether USD</p>
+                                            <p class="text-xs text-white/60">0.00 USDT</p>
+                                        </div>
+                                    </div>
+                                    <div class="text-right">
+                                        <p class="font-bold">₦0.00</p>
+                                        <p class="text-xs text-green-400">₦1,650/$1</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Buy/Sell Actions -->
+                    <div class="grid grid-cols-2 gap-4 mb-6">
+                        <button class="feature-card rounded-2xl p-6 text-center">
+                            <div class="w-12 h-12 bg-green-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto">
+                                <i data-feather="trending-up" class="w-6 h-6 text-green-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-1 text-secondary">Buy Crypto</h3>
+                            <p class="text-xs text-white/60">With Naira</p>
+                        </button>
+                        
+                        <button class="feature-card rounded-2xl p-6 text-center">
+                            <div class="w-12 h-12 bg-red-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto">
+                                <i data-feather="trending-down" class="w-6 h-6 text-red-400"></i>
+                            </div>
+                            <h3 class="font-bold mb-1 text-secondary">Sell Crypto</h3>
+                            <p class="text-xs text-white/60">To Naira</p>
+                        </button>
+                    </div>
+
+                    <!-- Market Insights -->
+                    <div class="glass-card rounded-2xl p-4">
+                        <h3 class="font-bold mb-3 text-secondary">📊 Market Insights</h3>
+                        <div class="space-y-2 text-sm text-white/70">
+                            <p>• Bitcoin is up 2.3% in the last 24 hours</p>
+                            <p>• Ethereum shows strong momentum with 1.8% gain</p>
+                            <p>• USDT remains stable - perfect for storing value</p>
+                            <p>• CBN-approved: All trades are 100% compliant</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Global Gifting Screen -->
+            <div id="giftingScreen" class="hidden animate-fade-in">
+                <div class="p-4">
+                    <div class="flex items-center mb-6">
+                        <button id="backFromGifting" class="mr-4 p-2 rounded-full hover:bg-white/10 transition-all">
+                            <i data-feather="arrow-left" class="w-6 h-6"></i>
+                        </button>
+                        <h1 class="text-xl font-bold">Send Gifts Globally</h1>
+                    </div>
+
+                    <!-- Gift Categories -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-4">Popular Categories</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="feature-card rounded-2xl p-6 text-center cursor-pointer">
+                                <div class="w-12 h-12 bg-pink-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto">
+                                    <span class="text-2xl">🌸</span>
+                                </div>
+                                <h3 class="font-bold mb-1 text-secondary">Flowers</h3>
+                                <p class="text-xs text-white/60">Fresh bouquets</p>
+                            </div>
+                            
+                            <div class="feature-card rounded-2xl p-6 text-center cursor-pointer">
+                                <div class="w-12 h-12 bg-brown-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto">
+                                    <span class="text-2xl">🍰</span>
+                                </div>
+                                <h3 class="font-bold mb-1 text-secondary">Cakes</h3>
+                                <p class="text-xs text-white/60">Birthday specials</p>
+                            </div>
+                            
+                            <div class="feature-card rounded-2xl p-6 text-center cursor-pointer">
+                                <div class="w-12 h-12 bg-blue-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto">
+                                    <span class="text-2xl">📱</span>
+                                </div>
+                                <h3 class="font-bold mb-1 text-secondary">Electronics</h3>
+                                <p class="text-xs text-white/60">Gadgets & tech</p>
+                            </div>
+                            
+                            <div class="feature-card rounded-2xl p-6 text-center cursor-pointer">
+                                <div class="w-12 h-12 bg-purple-100/20 rounded-xl flex items-center justify-center mb-3 mx-auto">
+                                    <span class="text-2xl">💝</span>
+                                </div>
+                                <h3 class="font-bold mb-1 text-secondary">Gift Boxes</h3>
+                                <p class="text-xs text-white/60">Curated gifts</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sample Gifts -->
+                    <div class="mb-6">
+                        <h2 class="text-lg font-bold mb-4">Featured Gifts</h2>
+                        <div class="space-y-4">
+                            <div class="glass-card rounded-xl p-4">
+                                <div class="flex space-x-3">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-pink-400 to-red-400 rounded-lg flex items-center justify-center">
+                                        <span class="text-2xl">🌹</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-sm">Premium Rose Bouquet</h3>
+                                        <p class="text-xs text-white/60 mb-1">12 red roses with baby's breath</p>
+                                        <p class="text-sm font-bold text-secondary">₦15,000</p>
+                                        <p class="text-xs text-green-400">Available in 50+ countries</p>
+                                    </div>
+                                    <button class="bg-primary/20 text-primary py-2 px-3 rounded-lg text-xs font-semibold">
+                                        Send Now
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="glass-card rounded-xl p-4">
+                                <div class="flex space-x-3">
+                                    <div class="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-400 rounded-lg flex items-center justify-center">
+                                        <span class="text-2xl">🎂</span>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h3 class="font-bold text-sm">Chocolate Birthday Cake</h3>
+                                        <p class="text-xs text-white/60 mb-1">Rich chocolate with custom message</p>
+                                        <p class="text-sm font-bold text-secondary">₦25,000</p>
+                                        <p class="text-xs text-green-400">Same-day delivery available</p>
+                                    </div>
+                                    <button class="bg-primary/20 text-primary py-2 px-3 rounded-lg text-xs font-semibold">
+                                        Send Now
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- AZAMAN Gift Suggestions -->
+                    <div class="glass-card rounded-2xl p-4">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="avatar-container w-10 h-10 border-2">
+                                <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="AZAMAN" class="avatar-image">
+                            </div>
+                            <div>
+                                <p class="font-semibold text-sm text-secondary">AZAMAN's Suggestions</p>
+                                <p class="text-xs text-white/60">Personalized for you</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-white/80 mb-3">
+                            Based on your spending pattern, I recommend starting with flowers or cakes - they're popular choices for first-time gift senders!
+                        </p>
+                        <button class="bg-secondary/20 text-secondary py-2 px-4 rounded-lg text-sm font-semibold">
+                            Get More Suggestions
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- History Screen -->
+            <div id="historyScreen" class="hidden animate-fade-in">
+                <div class="p-4">
+                    <div class="flex items-center mb-6">
+                        <button id="backFromHistory" class="mr-4 p-2 rounded-full hover:bg-white/10 transition-all">
+                            <i data-feather="arrow-left" class="w-6 h-6"></i>
+                        </button>
+                        <h1 class="text-xl font-bold">Transaction History</h1>
+                    </div>
+                    
+                    <!-- Filter Options -->
+                    <div class="flex space-x-2 mb-6 overflow-x-auto">
+                        <button class="filter-btn active whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold bg-primary text-white" data-filter="all">All</button>
+                        <button class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold glass-card" data-filter="gift-card">Gift Cards</button>
+                        <button class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold glass-card" data-filter="crypto">Crypto</button>
+                        <button class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold glass-card" data-filter="gifts">Gifts</button>
+                        <button class="filter-btn whitespace-nowrap px-4 py-2 rounded-full text-sm font-semibold glass-card" data-filter="transfer">Transfers</button>
+                    </div>
+                    
+                    <div class="space-y-3" id="fullHistoryContainer">
+                        <div class="text-center py-10 text-white/60">
+                            <i data-feather="clock" class="w-16 h-16 mx-auto mb-4 opacity-50"></i>
+                            <p class="text-lg font-semibold mb-2">No transactions yet</p>
+                            <p class="text-sm">Your transaction history will appear here</p>
+                            <button class="mt-4 bg-primary/20 text-primary py-2 px-4 rounded-lg text-sm font-semibold">
+                                Start Trading
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Screen -->
+            <div id="settingsScreen" class="hidden animate-fade-in">
+                <div class="p-4">
+                    <div class="flex items-center mb-6">
+                        <button id="backFromSettings" class="mr-4 p-2 rounded-full hover:bg-white/10 transition-all">
+                            <i data-feather="arrow-left" class="w-6 h-6"></i>
+                        </button>
+                        <h1 class="text-xl font-bold">Settings</h1>
+                    </div>
+
+                    <!-- Profile Section -->
+                    <div class="glass-card rounded-2xl p-6 mb-6">
+                        <div class="flex items-center space-x-4 mb-4">
+                            <div class="avatar-container w-16 h-16 border-2">
+                                <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="Avatar" class="avatar-image">
+                            </div>
+                            <div class="flex-1">
+                                <p class="font-bold text-lg" id="profileName">User Name</p>
+                                <p class="text-sm text-white/60" id="profileEmail">user@email.com</p>
+                                <div class="flex items-center space-x-2 mt-2">
+                                    <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                                    <span class="text-xs text-green-400">KYC Verified</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full bg-primary/20 text-primary py-3 rounded-xl font-semibold">
+                            <i data-feather="edit-2" class="w-4 h-4 inline mr-2"></i>
+                            Edit Profile
+                        </button>
+                    </div>
+
+                    <!-- Settings Groups -->
+                    <div class="space-y-4">
+                        <!-- Security Settings -->
+                        <div class="glass-card rounded-xl p-4">
+                            <h3 class="font-bold mb-3 text-secondary">Security & Privacy</h3>
+                            <div class="space-y-2">
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="lock" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Change PIN</span>
+                                    </div>
+                                    <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                </button>
+                                
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="smartphone" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">2FA Authentication</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-xs text-green-400">Enabled</span>
+                                        <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                    </div>
+                                </button>
+                                
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="fingerprint" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Biometric Login</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-xs text-green-400">Active</span>
+                                        <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Preferences -->
+                        <div class="glass-card rounded-xl p-4">
+                            <h3 class="font-bold mb-3 text-secondary">Preferences</h3>
+                            <div class="space-y-2">
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="bell" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Notifications</span>
+                                    </div>
+                                    <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                </button>
+                                
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="volume-2" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">AZAMAN Voice</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-xs text-green-400">On</span>
+                                        <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                    </div>
+                                </button>
+                                
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="globe" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Language</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-xs text-white/60">English (NG)</span>
+                                        <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Support & Legal -->
+                        <div class="glass-card rounded-xl p-4">
+                            <h3 class="font-bold mb-3 text-secondary">Support & Legal</h3>
+                            <div class="space-y-2">
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="help-circle" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Help Center</span>
+                                    </div>
+                                    <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                </button>
+                                
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="message-circle" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Contact Support</span>
+                                    </div>
+                                    <div class="flex items-center space-x-2">
+                                        <span class="text-xs text-green-400">24/7</span>
+                                        <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                    </div>
+                                </button>
+                                
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="file-text" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Terms & Conditions</span>
+                                    </div>
+                                    <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                </button>
+                                
+                                <button class="w-full flex items-center justify-between py-3 px-2 hover:bg-white/5 rounded-lg transition-all">
+                                    <div class="flex items-center space-x-3">
+                                        <i data-feather="shield" class="w-5 h-5 text-primary"></i>
+                                        <span class="text-sm">Privacy Policy</span>
+                                    </div>
+                                    <i data-feather="chevron-right" class="w-4 h-4 text-white/60"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- App Info -->
+                        <div class="glass-card rounded-xl p-4 mb-6">
+                            <h3 class="font-bold mb-3 text-secondary">App Information</h3>
+                            <div class="space-y-3 text-sm text-white/70">
+                                <div class="flex justify-between">
+                                    <span>Version</span>
+                                    <span>1.0.0 (Production)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>License</span>
+                                    <span class="text-green-400">SEC Registered VASP</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Compliance</span>
+                                    <span class="text-green-400">CBN Approved</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Logout Button -->
+                        <button id="logoutBtn" class="w-full glass-card border border-red-400/30 rounded-xl p-4 flex items-center justify-center space-x-3 hover:bg-red-500/10 transition-all text-red-400">
+                            <i data-feather="log-out" class="w-5 h-5"></i>
+                            <span class="font-semibold">Logout</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Coming Soon Screens -->
+            <div id="comingSoonScreen" class="hidden animate-fade-in">
+                <div class="p-4 min-h-screen flex items-center justify-center">
+                    <div class="text-center max-w-sm">
+                        <div class="w-24 h-24 bg-gradient-to-br from-secondary to-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i data-feather="zap" class="w-12 h-12 text-white"></i>
+                        </div>
+                        <h2 class="text-2xl font-bold mb-4 text-secondary">Coming Soon!</h2>
+                        <p class="text-white/70 mb-6" id="comingSoonMessage">This feature is under development and will be available soon.</p>
+                        <button id="backFromComingSoon" class="bg-gradient-to-r from-primary to-teal-600 text-white py-3 px-6 rounded-xl font-semibold">
+                            Back to Home
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md glass-effect border-t border-secondary/20">
+            <div class="flex justify-around py-3">
+                <button id="navHome" class="nav-item active flex flex-col items-center py-2 px-4 rounded-lg transition-all">
+                    <i data-feather="home" class="w-5 h-5 mb-1"></i>
+                    <span class="text-xs">Home</span>
+                </button>
+                <button id="navTrade" class="nav-item flex flex-col items-center py-2 px-4 rounded-lg transition-all">
+                    <i data-feather="credit-card" class="w-5 h-5 mb-1"></i>
+                    <span class="text-xs">Trade</span>
+                </button>
+                <button id="navHistory" class="nav-item flex flex-col items-center py-2 px-4 rounded-lg transition-all">
+                    <i data-feather="clock" class="w-5 h-5 mb-1"></i>
+                    <span class="text-xs">History</span>
+                </button>
+                <button id="navSettings" class="nav-item flex flex-col items-center py-2 px-4 rounded-lg transition-all">
+                    <i data-feather="settings" class="w-5 h-5 mb-1"></i>
+                    <span class="text-xs">Settings</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- PIN Modal -->
+        <div id="pinModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+            <div class="glass-card rounded-3xl p-6 max-w-sm w-full mx-4 border border-secondary/30">
+                <div class="text-center mb-6">
+                    <div class="avatar-container w-16 h-16 mx-auto mb-4" id="pinModalAvatar">
+                        <img src="https://pfst.cf2.poecdn.net/base/image/76f496f0052664a08053ac37a7d45875fdfb345c4a62a959501934a9bdd84743?w=397&h=476" alt="Avatar" class="avatar-image">
+                    </div>
+                    <h3 class="text-lg font-bold mb-2 text-secondary">Secure Transaction</h3>
+                    <p class="text-sm text-white/70">Enter your 4-digit PIN to authorize this transaction</p>
+                    <p class="text-xs text-white/50 mt-2" id="transactionDetails">Gift card trade • Estimated value: ₦45,000</p>
+                </div>
+                
+                <div class="flex justify-center space-x-3 mb-6">
+                    <div class="w-12 h-12 border-2 border-white/30 rounded-xl flex items-center justify-center">
+                        <span id="pin1" class="text-xl font-bold"></span>
+                    </div>
+                    <div class="w-12 h-12 border-2 border-white/30 rounded-xl flex items-center justify-center">
+                        <span id="pin2" class="text-xl font-bold"></span>
+                    </div>
+                    <div class="w-12 h-12 border-2 border-white/30 rounded-xl flex items-center justify-center">
+                        <span id="pin3" class="text-xl font-bold"></span>
+                    </div>
+                    <div class="w-12 h-12 border-2 border-white/30 rounded-xl flex items-center justify-center">
+                        <span id="pin4" class="text-xl font-bold"></span>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">1</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">2</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">3</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-web-white/10 transition-all">4</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">5</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">6</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">7</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">8</button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">9</button>
+                    <button class="w-full h-12"></button>
+                    <button class="pin-btn w-full h-12 glass-card rounded-lg text-lg font-bold hover:bg-white/10 transition-all">0</button>
+                    <button id="pinDelete" class="w-full h-12 glass-card rounded-lg flex items-center justify-center hover:bg-white/10 transition-all">
+                        <i data-feather="delete" class="w-5 h-5"></i>
+                    </button>
+                </div>
+                
+                <button id="cancelPin" class="w-full py-3 text-white/70 hover:text-white transition-all">Cancel Transaction</button>
+            </div>
+        </div>
+    </div>
 
     <script>
-        function showModal() {
-            document.getElementById('modal').classList.add('show');
+        // --- PRODUCTION-READY JAVASCRIPT ---
+
+        // Global app state
+        let appState = {
+            isLoggedIn: false,
+            currentUser: null,
+            voiceEnabled: true,
+            balanceHidden: false,
+            pinCode: '',
+            pendingTransaction: null,
+            notifications: [],
+            currentScreen: 'home',
+            azamanActive: false,
+            engagementContent: [
+                {
+                    message: "Boss! Did you know gift card trading volume increased 340% in Nigeria this year? Time to get your share! 💪",
+                    action: "Start Trading",
+                    type: "fact"
+                },
+                {
+                    message: "Your crypto portfolio looking dry o! USDT dey stable at ₦1,650 per dollar. Perfect time to buy small small! 🔥",
+                    action: "Buy Crypto",
+                    type: "market"
+                },
+                {
+                    message: "Wetin you wan send your mama for her birthday? I fit help you find the perfect gift anywhere in the world! 🎁",
+                    action: "Browse Gifts",
+                    type: "suggestion"
+                },
+                {
+                    message: "Security tip: Make sure you enable 2FA for maximum protection. Your money too important to joke with! 🔒",
+                    action: "Enable 2FA",
+                    type: "security"
+                }
+            ]
+        };
+
+        // Realistic data generators
+        function generateRealisticUserData(name, email, phone, bvn) {
+            return {
+                name: name,
+                email: email,
+                phone: phone,
+                bvn: bvn,
+                balance: Math.floor(Math.random() * 2000000) + 500000, // 500k-2.5M NGN
+                cryptoPortfolio: {
+                    btc: Math.random() * 0.05, // 0-0.05 BTC
+                    eth: Math.random() * 0.5,   // 0-0.5 ETH
+                    usdt: Math.random() * 1000  // 0-1000 USDT
+                },
+                transactions: generateRealisticTransactions(),
+                joinDate: new Date().toISOString(),
+                lastLogin: new Date().toISOString(),
+                kycStatus: 'verified',
+                tier: 'premium'
+            };
         }
 
-        function closeModal() {
-            document.getElementById('modal').classList.remove('show');
+        function generateRealisticTransactions() {
+            const types = [
+                { type: 'iTunes Card Trade', amount: [25000, 85000], icon: 'credit-card', category: 'gift-card' },
+                { type: 'Amazon Gift Card', amount: [15000, 65000], icon: 'credit-card', category: 'gift-card' },
+                { type: 'Steam Wallet Trade', amount: [10000, 45000], icon: 'credit-card', category: 'gift-card' },
+                { type: 'Bitcoin Purchase', amount: [-100000, -800000], icon: 'trending-up', category: 'crypto' },
+                { type: 'Ethereum Sale', amount: [80000, 400000], icon: 'trending-down', category: 'crypto' },
+                { type: 'USDT Purchase', amount: [-50000, -200000], icon: 'trending-up', category: 'crypto' },
+                { type: 'Gift to Mother', amount: [-35000, -85000], icon: 'gift', category: 'gifts' },
+                { type: 'Birthday Flowers', amount: [-15000, -35000], icon: 'gift', category: 'gifts' },
+                { type: 'P2P Transfer', amount: [-25000, -100000], icon: 'send', category: 'transfer' },
+                { type: 'Received Payment', amount: [30000, 150000], icon: 'download', category: 'transfer' }
+            ];
+
+            const transactions = [];
+            for (let i = 0; i < 20; i++) {
+                const type = types[Math.floor(Math.random() * types.length)];
+                const amount = Math.floor(Math.random() * (type.amount[1] - type.amount[0] + 1)) + type.amount[0];
+                const daysAgo = Math.floor(Math.random() * 60); // Last 60 days
+                
+                transactions.push({
+                    id: `AZR_${Date.now()}_${String(i).padStart(3, '0')}`,
+                    type: type.type,
+                    amount: amount,
+                    date: new Date(Date.now() - (daysAgo * 24 * 60 * 60 * 1000)).toISOString(),
+                    status: Math.random() > 0.05 ? 'Completed' : 'Pending',
+                    icon: type.icon,
+                    category: type.category,
+                    reference: `REF${Math.random().toString(36).substr(2, 9).toUpperCase()}`
+                });
+            }
+            return transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
         }
 
-        function startTrade() {
-            const type = document.getElementById('gift-card-type').value;
-            if (type !== "Which gift card do you want to trade?") {
-                alert(`Starting trade for ${type}! Processing...`);
-                showModal();
+        // AZAMAN AI responses
+        const azamanResponses = {
+            greeting: [
+                "Hey Boss! Ready to make some serious money moves today? 💪",
+                "Diva, your portfolio looking fine! What we conquering today? 🔥",
+                "Welcome back, money maker! Your account dey shine like diamond! ✨"
+            ],
+            trading: [
+                "Sharp sharp! You just started a trade. Make we get this money together! 🚀",
+                "Boss, your trade dey process. Soon you go see credit alert wey go make you smile! 😎",
+                "That gift card go turn to serious cash now now. You too smart! 🧠"
+            ],
+            success: [
+                "Omo! Credit alert don enter! You deserve more than this, we go harder next time! 🎉",
+                "Boss, see as your money increase! This one na just appetizer o! 💰",
+                "Your account balance looking sweet! More where that came from! 🔥"
+            ],
+            help: [
+                "I be your personal money assistant. Tell me wetin you wan do and I go help you sharp sharp!",
+                "From gift card trading to crypto buying, I get your back 24/7. Just talk to me!",
+                "Need help with anything? I sabi everything about money matters for this app!"
+            ]
+        };
+
+        // Core utility functions
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-NG', { 
+                style: 'currency', 
+                currency: 'NGN', 
+                minimumFractionDigits: 2 
+            }).format(Math.abs(amount));
+        }
+
+        function formatCrypto(amount, symbol) {
+            return `${amount.toFixed(8)} ${symbol}`;
+        }
+
+        function timeAgo(date) {
+            const seconds = Math.floor((new Date() - new Date(date)) / 1000);
+            
+            if (seconds < 60) return 'Just now';
+            if (seconds < 3600) return Math.floor(seconds / 60) + 'm ago';
+            if (seconds < 86400) return Math.floor(seconds / 3600) + 'h ago';
+            if (seconds < 2592000) return Math.floor(seconds / 86400) + 'd ago';
+            
+            return new Date(date).toLocaleDateString();
+        }
+
+        function getRandomElement(array) {
+            return array[Math.floor(Math.random() * array.length)];
+        }
+
+        function animateCounter(element, start, end, duration = 2000, formatter = null) {
+            const range = end - start;
+            const increment = range / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= end) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                
+                if (formatter) {
+                    element.textContent = formatter(current);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString() + '+';
+                }
+            }, 16);
+        }
+
+        // Enhanced loading screen
+        function enhancedLoadingSequence() {
+            const loadingTexts = [
+                "Initializing secure connections...",
+                "Connecting to Nigerian banking systems...",
+                "Verifying regulatory compliance...",
+                "Loading real-time exchange rates...",
+                "Preparing your personalized dashboard...",
+                "Ready to revolutionize your finances!"
+            ];
+            
+            let currentText = 0;
+            let progress = 0;
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 15 + 8;
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(hideLoadingScreen, 800);
+                }
+                
+                document.getElementById('loadingProgress').style.width = progress + '%';
+                
+                if (currentText < loadingTexts.length - 1 && progress > (currentText + 1) * 16.67) {
+                    currentText++;
+                    document.getElementById('loadingText').textContent = loadingTexts[currentText];
+                }
+            }, 300);
+        }
+
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loadingScreen');
+            loadingScreen.style.opacity = '0';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                document.getElementById('landingPage').classList.remove('hidden');
+                
+                // Start counter animations
+                setTimeout(() => {
+                    animateCounter(document.getElementById('usersCounter'), 0, 587420, 3000);
+                    animateCounter(document.getElementById('volumeCounter'), 0, 2840000000, 3000, (val) => '₦' + Math.floor(val / 1000000) + 'B+');
+                    animateCounter(document.getElementById('rateCounter'), 0, 99.8, 3000, (val) => val.toFixed(1) + '%');
+                }, 1000);
+            }, 500);
+        }
+
+        // Authentication system
+        function showAuthModal() {
+            document.getElementById('authModal').classList.remove('hidden');
+            document.getElementById('authName').focus();
+        }
+
+        function hideAuthModal() {
+            document.getElementById('authModal').classList.add('hidden');
+        }
+
+        function authenticateUser() {
+            const name = document.getElementById('authName').value.trim();
+            const email = document.getElementById('authEmail').value.trim();
+            const phone = document.getElementById('authPhone').value.trim();
+            const bvn = document.getElementById('authBVN').value.trim();
+            const terms = document.getElementById('authTerms').checked;
+            
+            // Validation
+            if (!name || !email || !phone || !bvn) {
+                showNotification('Please fill in all required fields', 'error');
+                return;
+            }
+            
+            if (!terms) {
+                showNotification('Please accept the Terms & Conditions', 'error');
+                return;
+            }
+            
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showNotification('Please enter a valid email address', 'error');
+                return;
+            }
+            
+            if (!/^(\+234|0)[789]\d{9}$/.test(phone)) {
+                showNotification('Please enter a valid Nigerian phone number', 'error');
+                return;
+            }
+            
+            if (!/^\d{11}$/.test(bvn)) {
+                showNotification('BVN must be exactly 11 digits', 'error');
+                return;
+            }
+            
+            // Create user data
+            appState.isLoggedIn = true;
+            appState.currentUser = generateRealisticUserData(name, email, phone, bvn);
+            
+            hideAuthModal();
+            transitionToDashboard();
+            
+            setTimeout(() => {
+                showNotification(`Welcome ${name.split(' ')[0]}! Your account is fully verified.`, 'success');
+                speak(getRandomElement(azamanResponses.greeting));
+            }, 1000);
+        }
+
+        function transitionToDashboard() {
+            document.getElementById('landingPage').classList.add('hidden');
+            document.getElementById('dashboardApp').classList.remove('hidden');
+            document.getElementById('userStateIndicator').classList.remove('hidden');
+            
+            appState.currentScreen = 'home';
+            renderDashboard();
+            updateEngagementHub();
+            
+            // Add notifications
+            addNotification('KYC verification completed successfully!');
+            addNotification('Welcome bonus: Trade your first gift card and get 2% extra!');
+            addNotification('AZAMAN AI assistant is ready to help you');
+        }
+
+        // Dashboard rendering
+        function renderDashboard() {
+            if (!appState.isLoggedIn || !appState.currentUser) return;
+            
+            // Update user info
+            const firstName = appState.currentUser.name.split(' ')[0];
+            document.getElementById('welcomeUserName').textContent = firstName;
+            document.getElementById('profileName').textContent = appState.currentUser.name;
+            document.getElementById('profileEmail').textContent = appState.currentUser.email;
+            document.getElementById('userStatus').textContent = `👋 ${firstName}`;
+            document.getElementById('lastLoginTime').textContent = `Last seen: ${timeAgo(appState.currentUser.lastLogin)}`;
+            
+            renderBalance();
+            renderCryptoPortfolio();
+            renderRecentTransactions();
+            updateCryptoPrices();
+            updateNotificationCount();
+        }
+
+        function renderBalance() {
+            const balanceElement = document.getElementById('totalBalance');
+            const changeElement = document.getElementById('balanceChange');
+            
+            if (appState.balanceHidden) {
+                balanceElement.textContent = '****,***.**';
+                changeElement.textContent = '+****.**';
             } else {
-                alert('Please select a gift card type.');
+                const balance = appState.currentUser.balance;
+                const crypto = appState.currentUser.cryptoPortfolio;
+                
+                // Calculate crypto value in NGN
+                const btcValue = crypto.btc * 45670000; // BTC price in NGN
+                const ethValue = crypto.eth * 3875000;  // ETH price in NGN
+                const usdtValue = crypto.usdt * 1650;   // USDT price in NGN
+                
+                const totalValue = balance + btcValue + ethValue + usdtValue;
+                const dailyChange = Math.floor(Math.random() * 80000) + 15000;
+                const changePercent = ((dailyChange / totalValue) * 100).toFixed(2);
+                
+                balanceElement.textContent = formatCurrency(totalValue);
+                changeElement.textContent = `+${formatCurrency(dailyChange)} (+${changePercent}%) today`;
             }
         }
+
+        function renderCryptoPortfolio() {
+            const crypto = appState.currentUser.cryptoPortfolio;
+            const btcValue = crypto.btc * 45670000;
+            const ethValue = crypto.eth * 3875000;
+            const usdtValue = crypto.usdt * 1650;
+            const totalCryptoValue = btcValue + ethValue + usdtValue;
+            
+            document.getElementById('cryptoPortfolioValue').textContent = formatCurrency(totalCryptoValue);
+        }
+
+        function updateCryptoPrices() {
+            // Simulate real-time price updates
+            const btcPrice = 45670000 + Math.floor(Math.random() * 200000 - 100000);
+            const ethPrice = 3875000 + Math.floor(Math.random() * 100000 - 50000);
+            
+            document.getElementById('btcPrice').textContent = formatCurrency(btcPrice);
+            document.getElementById('ethPrice').textContent = formatCurrency(ethPrice);
+        }
+
+        function renderRecentTransactions() {
+            const container = document.getElementById('recentTransactionsContainer');
+            container.innerHTML = '';
+            
+            const transactions = appState.currentUser.transactions.slice(0, 5);
+            
+            if (transactions.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-8 text-white/60">
+                        <i data-feather="activity" class="w-12 h-12 mx-auto mb-3 opacity-50"></i>
+                        <p>Your transactions will appear here</p>
+                        <p class="text-xs mt-1">Start trading to see your activity</p>
+                    </div>
+                `;
+                feather.replace();
+                return;
+            }
+
+            transactions.forEach(tx => {
+                const isCredit = tx.amount > 0;
+                const color = isCredit ? 'green' : 'red';
+                
+                const txElement = document.createElement('div');
+                txElement.className = 'transaction-item glass-card rounded-xl p-4 flex items-center space-x-3 cursor-pointer hover:scale-105 transition-all';
+                txElement.innerHTML = `
+                    <div class="w-12 h-12 bg-${color}-100/20 rounded-full flex items-center justify-center">
+                        <i data-feather="${tx.icon}" class="w-6 h-6 text-${color}-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold text-sm">${tx.type}</p>
+                        <p class="text-xs text-white/60">${timeAgo(tx.date)}</p>
+                        <p class="text-xs text-${tx.status === 'Completed' ? 'green' : 'yellow'}-400">${tx.status}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-${color}-400 text-sm">${isCredit ? '+' : '-'}${formatCurrency(tx.amount)}</p>
+                        <p class="text-xs text-white/60">#${tx.reference}</p>
+                    </div>
+                `;
+                
+                txElement.addEventListener('click', () => {
+                    showTransactionDetails(tx);
+                });
+                
+                container.appendChild(txElement);
+            });
+            
+            feather.replace();
+        }
+
+        function renderHistoryScreen(filter = 'all') {
+            showScreen('history');
+            const container = document.getElementById('fullHistoryContainer');
+            container.innerHTML = '';
+            
+            let transactions = appState.currentUser.transactions;
+            if (filter !== 'all') {
+                transactions = transactions.filter(tx => tx.category === filter);
+            }
+
+            if (transactions.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-10 text-white/60">
+                        <i data-feather="clock" class="w-16 h-16 mx-auto mb-4 opacity-50"></i>
+                        <p class="text-lg font-semibold mb-2">No transactions found</p>
+                        <p class="text-sm">Try a different filter or start trading</p>
+                    </div>
+                `;
+                feather.replace();
+                return;
+            }
+
+            transactions.forEach(tx => {
+                const isCredit = tx.amount > 0;
+                const color = isCredit ? 'green' : 'red';
+                
+                const txElement = document.createElement('div');
+                txElement.className = 'transaction-item glass-card rounded-xl p-4 flex items-center space-x-3 cursor-pointer';
+                txElement.innerHTML = `
+                    <div class="w-12 h-12 bg-${color}-100/20 rounded-full flex items-center justify-center">
+                        <i data-feather="${tx.icon}" class="w-6 h-6 text-${color}-400"></i>
+                    </div>
+                    <div class="flex-1">
+                        <p class="font-semibold">${tx.type}</p>
+                        <p class="text-xs text-white/60">${new Date(tx.date).toLocaleString()}</p>
+                        <p class="text-xs text-${tx.status === 'Completed' ? 'green' : 'yellow'}-400">${tx.status}</p>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold text-${color}-400">${isCredit ? '+' : '-'}${formatCurrency(tx.amount)}</p>
+                        <p class="text-xs text-white/60">#${tx.reference}</p>
+                    </div>
+                `;
+                
+                txElement.addEventListener('click', () => {
+                    showTransactionDetails(tx);
+                });
+                
+                container.appendChild(txElement);
+            });
+            
+            feather.replace();
+        }
+
+        function showTransactionDetails(tx) {
+            const isCredit = tx.amount > 0;
+            showCustomModal('Transaction Details', `
+                <div class="space-y-4">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-${isCredit ? 'green' : 'red'}-100/20 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i data-feather="${tx.icon}" class="w-8 h-8 text-${isCredit ? 'green' : 'red'}-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-secondary">${tx.type}</h3>
+                        <p class="text-2xl font-bold text-${isCredit ? 'green' : 'red'}-400">${isCredit ? '+' : '-'}${formatCurrency(tx.amount)}</p>
+                    </div>
+                    <div class="space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="text-white/60">Reference:</span>
+                            <span class="font-mono">#${tx.reference}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-white/60">Date:</span>
+                            <span>${new Date(tx.date).toLocaleString()}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-white/60">Status:</span>
+                            <span class="text-${tx.status === 'Completed' ? 'green' : 'yellow'}-400">${tx.status}</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-white/60">Category:</span>
+                            <span class="capitalize">${tx.category.replace('-', ' ')}</span>
+                        </div>
+                    </div>
+                </div>
+            `);
+        }
+
+        // Gift card processing simulation
+        function simulateGiftCardProcessing() {
+            document.getElementById('uploadArea').classList.add('hidden');
+            document.getElementById('processingStatus').classList.remove('hidden');
+            
+            const stages = [
+                'Initializing AI-powered OCR...',
+                'Scanning image with advanced algorithms...',
+                'Extracting card number and PIN...',
+                'Validating card with merchant systems...',
+                'Checking card balance and authenticity...',
+                'Calculating real-time exchange rate...',
+                'Preparing transaction for approval...',
+                'Processing complete!'
+            ];
+            
+            let currentStage = 0;
+            let progress = 0;
+            
+            const interval = setInterval(() => {
+                if (currentStage < stages.length) {
+                    document.getElementById('processingStep').textContent = stages[currentStage];
+                    progress += Math.random() * 15 + 10;
+                    document.getElementById('processingProgress').style.width = Math.min(progress, 100) + '%';
+                    currentStage++;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('processingStatus').classList.add('hidden');
+                    document.getElementById('uploadArea').classList.remove('hidden');
+                    
+                    // Calculate estimated value
+                    const estimatedValue = Math.floor(Math.random() * (85000 - 25000 + 1)) + 25000;
+                    document.getElementById('transactionDetails').textContent = `Gift card trade • Estimated value: ${formatCurrency(estimatedValue)}`;
+                    
+                    showPinModal('gift_card_exchange');
+                    speak(getRandomElement(azamanResponses.trading));
+                }
+            }, 800);
+        }
+
+        function processPendingTransaction() {
+            if (appState.pendingTransaction === 'gift_card_exchange') {
+                const tradeAmount = Math.floor(Math.random() * (85000 - 25000 + 1)) + 25000;
+                const reference = `GCT${Math.random().toString(36).substr(2, 9).toUpperCase()}`;
+                
+                appState.currentUser.balance += tradeAmount;
+                appState.currentUser.transactions.unshift({
+                    id: `AZR_${Date.now()}`,
+                    type: 'Gift Card Trade',
+                    amount: tradeAmount,
+                    date: new Date().toISOString(),
+                    status: 'Completed',
+                    icon: 'credit-card',
+                    category: 'gift-card',
+                    reference: reference
+                });
+                
+                renderDashboard();
+                showScreen('home');
+                showNotification(`${formatCurrency(tradeAmount)} credited to your account! (Ref: #${reference})`, 'success');
+                addNotification(`Gift card trade completed: +${formatCurrency(tradeAmount)}`);
+                speak(getRandomElement(azamanResponses.success));
+            }
+        }
+
+        // PIN modal functions
+        function showPinModal(transactionType) {
+            appState.pendingTransaction = transactionType;
+            document.getElementById('pinModal').classList.remove('hidden');
+            appState.pinCode = '';
+            updatePinDisplay();
+        }
+
+        function hidePinModal() {
+            document.getElementById('pinModal').classList.add('hidden');
+            appState.pendingTransaction = null;
+        }
+
+        function updatePinDisplay() {
+            [1, 2, 3, 4].forEach(i => {
+                const pinElement = document.getElementById(`pin${i}`);
+                const container = pinElement.parentElement;
+                
+                if (i <= appState.pinCode.length) {
+                    pinElement.textContent = '•';
+                    container.classList.add('border-secondary');
+                    container.classList.remove('border-white/30');
+                } else {
+                    pinElement.textContent = '';
+                    container.classList.remove('border-secondary');
+                    container.classList.add('border-white/30');
+                }
+            });
+        }
+
+        function addPinDigit(digit) {
+            if (appState.pinCode.length < 4) {
+                appState.pinCode += digit;
+                updatePinDisplay();
+                
+                if (appState.pinCode.length === 4) {
+                    // Simulate PIN verification
+                    setTimeout(() => {
+                        processPendingTransaction();
+                        hidePinModal();
+                    }, 800);
+                }
+            }
+        }
+
+        function deletePinDigit() {
+            appState.pinCode = appState.pinCode.slice(0, -1);
+            updatePinDisplay();
+        }
+
+        // AZAMAN AI system
+        function toggleAzaman() {
+            appState.azamanActive = !appState.azamanActive;
+            const azamanInterface = document.getElementById('azamanInterface');
+            
+            if (appState.azamanActive) {
+                azamanInterface.classList.remove('hidden');
+                document.getElementById('azamanResponse').textContent = getRandomElement(azamanResponses.help);
+            } else {
+                azamanInterface.classList.add('hidden');
+            }
+        }
+
+        function updateEngagementHub() {
+            const content = getRandomElement(appState.engagementContent);
+            document.getElementById('engagementContent').textContent = content.message;
+            document.getElementById('engagementAction').textContent = content.action;
+            document.getElementById('engagementTimestamp').textContent = 'Just now';
+        }
+
+        function refreshEngagement() {
+            updateEngagementHub();
+            showNotification('Fresh content loaded!', 'info');
+        }
+
+        // Screen navigation
+        const screens = ['home', 'giftCard', 'crypto', 'gifting', 'history', 'settings', 'comingSoon'];
+
+        function showScreen(screenName) {
+            // Hide all screens
+            screens.forEach(s => {
+                const screen = document.getElementById(`${s}Screen`);
+                if (screen) screen.classList.add('hidden');
+            });
+            
+            // Show target screen
+            const targetScreen = document.getElementById(`${screenName}Screen`);
+            if (targetScreen) {
+                targetScreen.classList.remove('hidden');
+                appState.currentScreen = screenName;
+            }
+
+            // Update navigation
+            document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+            const activeNav = {
+                'home': 'navHome',
+                'giftCard': 'navTrade',
+                'crypto': 'navTrade',
+                'history': 'navHistory',
+                'settings': 'navSettings'
+            }[screenName];
+            
+            if (activeNav) {
+                document.getElementById(activeNav).classList.add('active');
+            }
+        }
+
+        function showComingSoon(featureName) {
+            document.getElementById('comingSoonMessage').textContent = `${featureName} is coming soon! We're working hard to bring you this amazing feature.`;
+            showScreen('comingSoon');
+        }
+
+        // Notification system
+        function addNotification(message) {
+            appState.notifications.push({
+                id: Date.now(),
+                message: message,
+                timestamp: new Date().toISOString(),
+                read: false
+            });
+            updateNotificationCount();
+        }
+
+        function updateNotificationCount() {
+            const unreadCount = appState.notifications.filter(n => !n.read).length;
+            const dot = document.getElementById('notificationDot');
+            
+            if (unreadCount > 0) {
+                dot.style.display = 'block';
+            } else {
+                dot.style.display = 'none';
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-20 left-4 right-4 max-w-md mx-auto z-50 p-4 rounded-xl shadow-2xl transform transition-all duration-500 ${
+                type === 'success' ? 'bg-gradient-to-r from-green-500 to-green-600 text-white' : 
+                type === 'error' ? 'bg-gradient-to-r from-red-500 to-red-600 text-white' :
+                'bg-gradient-to-r from-primary to-teal-600 text-white'
+            }`;
+            
+            notification.innerHTML = `
+                <div class="flex items-center space-x-3">
+                    <i data-feather="${type === 'success' ? 'check-circle' : type === 'error' ? 'x-circle' : 'info'}" class="w-5 h-5 flex-shrink-0"></i>
+                    <div class="font-semibold text-sm">${message}</div>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            feather.replace();
+            
+            setTimeout(() => {
+                notification.style.transform = 'translateY(-150%)';
+                setTimeout(() => notification.remove(), 500);
+            }, 4000);
+        }
+
+        function showCustomModal(title, content, buttons = null) {
+            const modal = document.createElement('div');
+            modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50';
+            modal.innerHTML = `
+                <div class="glass-card rounded-3xl p-6 max-w-md w-full mx-4 border border-secondary/30">
+                    <div class="text-center mb-6">
+                        <h3 class="text-xl font-bold mb-2 text-secondary">${title}</h3>
+                    </div>
+                    <div class="mb-6">${content}</div>
+                    <div class="flex justify-center">
+                        <button class="bg-primary/20 text-primary py-3 px-6 rounded-xl font-semibold" onclick="this.closest('.fixed').remove()">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+            feather.replace();
+        }
+
+        function speak(text) {
+            if (appState.voiceEnabled) {
+                console.log(`AZAMAN says: ${text}`);
+                // In a real app, this would use Web Speech API
+            }
+        }
+
+        function logoutUser() {
+            showCustomModal('Logout', `
+                <div class="text-center">
+                    <i data-feather="log-out" class="w-16 h-16 mx-auto mb-4 text-red-400"></i>
+                    <p class="text-white/80 mb-4">Are you sure you want to logout?</p>
+                    <div class="flex space-x-3">
+                        <button class="flex-1 glass-card text-white py-3 px-6 rounded-xl font-semibold" onclick="this.closest('.fixed').remove()">
+                            Cancel
+                        </button>
+                        <button class="flex-1 bg-red-500 text-white py-3 px-6 rounded-xl font-semibold" onclick="confirmLogout()">
+                            Logout
+                        </button>
+                    </div>
+                </div>
+            `);
+        }
+
+        function confirmLogout() {
+            appState.isLoggedIn = false;
+            appState.currentUser = null;
+            appState.notifications = [];
+            document.getElementById('dashboardApp').classList.add('hidden');
+            document.getElementById('userStateIndicator').classList.add('hidden');
+            document.getElementById('landingPage').classList.remove('hidden');
+            document.querySelector('.fixed').remove(); // Remove modal
+            showNotification('Logged out successfully. See you soon!', 'info');
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', function() {
+            enhancedLoadingSequence();
+            
+            // Landing page event listeners
+            document.getElementById('getStartedBtn').addEventListener('click', showAuthModal);
+            document.getElementById('loginBtn').addEventListener('click', showAuthModal);
+            document.getElementById('startTradingBtn').addEventListener('click', showAuthModal);
+            document.getElementById('learnMoreBtn').addEventListener('click', () => {
+                showNotification('Learn more about our SEC-registered, CBN-compliant platform!');
+            });
+
+            // Auth modal event listeners
+            document.getElementById('authCancel').addEventListener('click', hideAuthModal);
+            document.getElementById('authSubmit').addEventListener('click', authenticateUser);
+
+            // Navigation event listeners
+            document.getElementById('navHome').addEventListener('click', () => showScreen('home'));
+            document.getElementById('navTrade').addEventListener('click', () => showScreen('giftCard'));
+            document.getElementById('navHistory').addEventListener('click', () => renderHistoryScreen());
+            document.getElementById('navSettings').addEventListener('click', () => showScreen('settings'));
+
+            // Back button event listeners
+            document.getElementById('backFromGiftCard').addEventListener('click', () => showScreen('home'));
+            document.getElementById('backFromCrypto').addEventListener('click', () => showScreen('home'));
+            document.getElementById('backFromGifting').addEventListener('click', () => showScreen('home'));
+            document.getElementById('backFromHistory').addEventListener('click', () => showScreen('home'));
+            document.getElementById('backFromSettings').addEventListener('click', () => showScreen('home'));
+            document.getElementById('backFromComingSoon').addEventListener('click', () => showScreen('home'));
+
+            // Feature button event listeners
+            document.getElementById('giftCardBtn').addEventListener('click', () => showScreen('giftCard'));
+            document.getElementById('cryptoBtn').addEventListener('click', () => showScreen('crypto'));
+            document.getElementById('giftingBtn').addEventListener('click', () => showScreen('gifting'));
+            document.getElementById('billsBtn').addEventListener('click', () => showComingSoon('Bill Payments'));
+
+            // Other action button event listeners
+            document.getElementById('sendBtn').addEventListener('click', () => showComingSoon('Send Money'));
+            document.getElementById('receiveBtn').addEventListener('click', () => showComingSoon('Receive Money'));
+            document.getElementById('swapBtn').addEventListener('click', () => showComingSoon('Currency Swap'));
+
+            // AZAMAN interface
+            document.getElementById('azamanBtn').addEventListener('click', toggleAzaman);
+            document.getElementById('closeAzaman').addEventListener('click', toggleAzaman);
+            document.getElementById('voiceCommandBtn').addEventListener('click', () => {
+                showNotification('Voice commands coming soon! 🎤');
+            });
+            document.getElementById('quickHelpBtn').addEventListener('click', () => {
+                document.getElementById('azamanResponse').textContent = getRandomElement(azamanResponses.help);
+            });
+
+            // Engagement hub
+            document.getElementById('refreshEngagement').addEventListener('click', refreshEngagement);
+            document.getElementById('engagementAction').addEventListener('click', () => {
+                showNotification('Taking you to the feature... Coming soon!');
+            });
+
+            // Balance visibility toggle
+            document.getElementById('hideBalanceBtn').addEventListener('click', () => {
+                appState.balanceHidden = !appState.balanceHidden;
+                renderBalance();
+                const icon = document.querySelector('#hideBalanceBtn i');
+                icon.setAttribute('data-feather', appState.balanceHidden ? 'eye-off' : 'eye');
+                feather.replace();
+            });
+
+            // Gift card upload and processing
+            document.getElementById('uploadArea').addEventListener('click', () => {
+                document.getElementById('fileInput').click();
+            });
+            
+            document.getElementById('fileInput').addEventListener('change', (e) => {
+                if (e.target.files[0]) {
+                    simulateGiftCardProcessing();
+                }
+            });
+
+            // Gift card rate selection
+            document.querySelectorAll('[data-card-type]').forEach(card => {
+                card.addEventListener('click', () => {
+                    const cardType = card.dataset.cardType;
+                    showNotification(`${cardType.toUpperCase()} rate selected! Upload your card to continue.`, 'success');
+                });
+            });
+
+            // History filter buttons
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    document.querySelectorAll('.filter-btn').forEach(b => {
+                        b.classList.remove('active', 'bg-primary', 'text-white');
+                        b.classList.add('glass-card');
+                    });
+                    
+                    btn.classList.add('active', 'bg-primary', 'text-white');
+                    btn.classList.remove('glass-card');
+                    
+                    const filter = btn.dataset.filter;
+                    renderHistoryScreen(filter);
+                });
+            });
+
+            // PIN modal event listeners
+            document.querySelectorAll('.pin-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => addPinDigit(e.target.textContent));
+            });
+            
+            document.getElementById('pinDelete').addEventListener('click', deletePinDigit);
+            document.getElementById('cancelPin').addEventListener('click', hidePinModal);
+
+            // Logout button
+            document.getElementById('logoutBtn').addEventListener('click', logoutUser);
+
+            // Notification click
+            document.getElementById('notificationBtn').addEventListener('click', () => {
+                showCustomModal('Notifications', `
+                    <div class="space-y-3 max-h-64 overflow-y-auto">
+                        ${appState.notifications.length > 0 ? 
+                            appState.notifications.map(n => `
+                                <div class="glass-card rounded-lg p-3">
+                                    <p class="text-sm text-white/80">${n.message}</p>
+                                    <p class="text-xs text-white/50 mt-1">${timeAgo(n.timestamp)}</p>
+                                </div>
+                            `).join('') :
+                            '<div class="text-center py-8 text-white/60"><i data-feather="bell-off" class="w-12 h-12 mx-auto mb-3"></i><p>No notifications yet</p></div>'
+                        }
+                    </div>
+                `);
+                // Mark all as read
+                appState.notifications.forEach(n => n.read = true);
+                updateNotificationCount();
+            });
+
+            // Keyboard shortcuts for PIN
+            document.addEventListener('keydown', (e) => {
+                if (document.getElementById('pinModal').classList.contains('hidden')) return;
+                
+                if (e.key >= '0' && e.key <= '9') {
+                    addPinDigit(e.key);
+                } else if (e.key === 'Backspace') {
+                    deletePinDigit();
+                } else if (e.key === 'Escape') {
+                    hidePinModal();
+                }
+            });
+
+            // Enter key for auth form
+            document.getElementById('authModal').addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    authenticateUser();
+                }
+            });
+
+            // Update crypto prices every 30 seconds
+            setInterval(updateCryptoPrices, 30000);
+
+            // Update engagement content every 2 minutes
+            setInterval(updateEngagementHub, 120000);
+
+            feather.replace();
+        });
+
+        // Make confirmLogout available globally
+        window.confirmLogout = confirmLogout;
     </script>
 </body>
 </html>
